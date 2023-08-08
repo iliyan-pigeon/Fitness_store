@@ -1,7 +1,7 @@
 from django.urls import path, include
 
-from Fitness_store.fitness_app.views import the_view
+from Fitness_store.fitness_app.views import HomePageView
 
 urlpatterns = [
-    path('', the_view)
+    path('', HomePageView.as_view())
 ]
