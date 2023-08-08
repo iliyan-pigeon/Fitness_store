@@ -22,24 +22,52 @@ nav a:hover {
     background-color: #555;
 }
 .container {
-    max-width: 960px;
+    background-color: #444;
+    max-width: 100%;
     margin: 0 auto;
     padding: 2rem;
 }
+.container h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .hero-image {
-    background-image: url('your-fitness-image.jpg');
+    position: relative;
     background-size: cover;
-    height: 300px;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     text-align: center;
+    overflow: hidden;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Additional styling for the container */
+    width: 100%; /* Set the width as needed */
+    height: auto; /* Set the height as needed */
+    border: 1px solid #ccc;
 }
 .hero-content {
+    position: absolute;
     max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 0;
+    padding: 2rem 2rem 2rem 2rem;
+    background-color: #444;
+    border: 2px white;
+}
+.hero-content h2 {
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 0;
 }
 .services {
     display: flex;
