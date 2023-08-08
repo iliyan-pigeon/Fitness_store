@@ -54,11 +54,14 @@ nav a:hover {
 }
 .hero-content {
     position: absolute;
-    max-width: 600px;
+    /*max-width: 600px;*/
+    width: 30rem;
+    height: auto;
     margin: 0;
     padding: 2rem 2rem 2rem 2rem;
     background-color: #444;
-    border: 2px white;
+    border: 2px solid white;
+    border-radius: 30%;
 }
 .hero-content h2 {
     font-size: 4rem;
@@ -78,6 +81,13 @@ nav a:hover {
     text-align: center;
     max-width: 300px;
     padding: 1rem;
+    color: white;
+    border: 2px solid white;
+}
+.services-item img{
+    max-width: 100%;
+    height: 15rem;
+    display: block;
 }
 footer {
     background-color: #333;
