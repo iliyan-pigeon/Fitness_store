@@ -18,6 +18,10 @@ nav a {
     text-decoration: none;
     padding: 0.5rem 1rem;
 }
+a{
+    color: #fff;
+    text-decoration: none;
+}
 nav a:hover {
     background-color: #555;
 }
