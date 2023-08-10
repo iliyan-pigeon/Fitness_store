@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+    <a href="#" class="products-item">
+        <img src="{% static 'images/pexels-dom-j-45056.jpg' %}" alt="Service 1">
+        <h3>Skipping rope</h3>
+        <p>The best tool for dynamic and functional cardio!</p>
+    </a>
+    <a href="#" class="products-item">
+        <img src="{% static 'images/istockphoto-1371570040-1024x1024.jpg' %}" alt="Service 2">
+        <h3>Weightlifting straps</h3>
+        <p>Comfortable and reliable straps for every intense lifter!</p>
+    </a>
+    <a href="#" class="products-item">
+        <img src="{% static 'images/istockphoto-1320847570-1024x1024.jpg' %}" alt="Service 3">
+        <h3>Shaker</h3>
+        <p>High-quality shaker, with a volume of 750 ml., which allows you to mix your drinks quick and easy.</p>
+    </a>
+
+{% endblock %}
