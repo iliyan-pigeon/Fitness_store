@@ -1,0 +1,66 @@
+.about-us-image-container{
+        position: relative;
+    background-size: cover;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+.about-us-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Additional styling for the container */
+    width: 100%; /* Set the width as needed */
+    height: auto; /* Set the height as needed */
+    border: 1px solid #ccc;
+}
+.about-us-hero-content{
+    position: absolute;
+    width: 30rem;
+    height: auto;
+    margin: 0;
+    padding: 2rem 2rem 2rem 2rem;
+    background-color: #444;
+    border: 2px solid white;
+    border-radius: 30%;
+}
+.about-us-hero-content h2 {
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.info-container{
+    background-color: #444;
+    color: #fff;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.info-container h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info-container ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info-container ul li{
+    border: 2px solid white;
+    margin: 1rem;
+    padding: 1rem;
+}
+.info-container ul li h3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.horizontal-line{
+    color: #333;
+}

@@ -2,30 +2,31 @@
 
 {% block content %}
 {% load static %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h2>About Us</h2>
-      <p>Welcome to our fitness store! We are passionate about helping you achieve your fitness goals and live a healthy lifestyle.</p>
-      <p>Our mission is to provide high-quality fitness equipment, apparel, and accessories that empower you to take control of your health and wellness journey.</p>
-      <p>With a team of experienced fitness enthusiasts, we handpick each product in our store to ensure it meets our standards of quality, functionality, and style.</p>
-    </div>
-    <div class="col-md-6">
-      <img src="{% static 'images/marvin-meyer-SYTO3xs06fU-unsplash.jpg' %}" alt="About Us Image" class="img-fluid">
+<div class="about-us-image-container">
+    <img class="about-us-image" src="{% static 'images/marvin-meyer-SYTO3xs06fU-unsplash.jpg' %}" alt="About Us Image">
+    <div class="about-us-hero-content">
+        <h2><a href="{% url 'about us' %}">About Us</a></h2>
+        <p>Welcome to our fitness store! We are passionate about helping you achieve your fitness goals and live a healthy lifestyle.</p>
+        <p>Our mission is to provide high-quality fitness equipment, supplements and accessories that empower you to take control of your health and wellness journey.</p>
+        <p>With a team of experienced fitness enthusiasts, we handpick each product in our store to ensure it meets our standards of quality, functionality, and style.</p>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <h3>Our Values</h3>
+    <div class="info-container">
+      <h2>Our Values</h2>
       <ul>
-        <li>Quality: We are committed to offering products that are built to last and provide value.</li>
-        <li>Customer-Centric: Your satisfaction is our top priority, and we strive to exceed your expectations.</li>
-        <li>Community: We believe in fostering a supportive fitness community where everyone can thrive.</li>
-        <li>Innovation: We stay up-to-date with the latest fitness trends to bring you cutting-edge products.</li>
+          <li><h3>Quality</h3> We are committed to offering products that are built to last and provide value.</li>
+          <li><h3>Customer-Centric</h3> Your satisfaction is our top priority, and we strive to exceed your expectations.</li>
+          <li><h3>Community</h3> We believe in fostering a supportive fitness community where everyone can thrive.</li>
+          <li><h3>Innovation</h3> We stay up-to-date with the latest fitness trends to bring you cutting-edge products.</li>
       </ul>
     </div>
-  </div>
-</div>
+    <hr class="horizontal-line">
+    <div class="info-container">
+      <h2>Brand Information</h2>
+      <ul>
+        <li>Behind every remarkable venture lies an inspiring story, and Pure Strength is no exception. The journey of our company started in Sofia/Bulgaria in 2023 year.</li>
+      </ul>
+    </div>
 {% endblock %}
 
 
