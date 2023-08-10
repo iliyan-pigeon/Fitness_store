@@ -2,20 +2,37 @@
 {% block content %}
 {% load static %}
 
-    <a href="#" class="products-item">
-        <img src="{% static 'images/pexels-dom-j-45056.jpg' %}" alt="Service 1">
-        <h3>Skipping rope</h3>
-        <p>The best tool for dynamic and functional cardio!</p>
-    </a>
-    <a href="#" class="products-item">
-        <img src="{% static 'images/istockphoto-1371570040-1024x1024.jpg' %}" alt="Service 2">
-        <h3>Weightlifting straps</h3>
-        <p>Comfortable and reliable straps for every intense lifter!</p>
-    </a>
-    <a href="#" class="products-item">
-        <img src="{% static 'images/istockphoto-1320847570-1024x1024.jpg' %}" alt="Service 3">
-        <h3>Shaker</h3>
-        <p>High-quality shaker, with a volume of 750 ml., which allows you to mix your drinks quick and easy.</p>
-    </a>
+    <div class="supplements-container" id="products">
+        <h2>SUPPLEMENTS</h2>
+        <div class="products">
+            <a href="#" class="products-item">
+                <img src="{% static 'images/istockphoto-1200872324-1024x1024.jpg' %}" alt="Service 1">
+                <h3>Whey protein</h3>
+                <div class="product-container">
+                <p>Amount: 2 kg.</p>
+                <p>Price: 130 lv.</p>
+                </div>
+                <button>Add to cart</button>
+            </a>
+            <a href="#" class="products-item">
+                <img src="{% static 'images/istockphoto-1383504099-1024x1024.jpg' %}" alt="Service 2">
+                <h3>Creatine</h3>
+                <div class="product-container">
+                <p>Amount: 0.5 kg.</p>
+                <p>Price: 40 lv.</p>
+                </div>
+                <button>Add to cart</button>
+            </a>
+            <a href="#" class="products-item">
+                <img src="{% static 'images/istockphoto-1185682437-1024x1024.jpg' %}" alt="Service 3">
+                <h3>BCAA</h3>
+                <div class="product-container">
+                <p>Amount: 0.5 kg.</p>
+                <p>Price: 25 lv.</p>
+                </div>
+                <button>Add to cart</button>
+            </a>
+        </div>
+    </div>
 
 {% endblock %}

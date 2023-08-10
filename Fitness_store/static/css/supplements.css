@@ -1,0 +1,17 @@
+.product-container{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 1rem;
+}
+.supplements-container{
+    background-color: #444;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.supplements-container h2{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
