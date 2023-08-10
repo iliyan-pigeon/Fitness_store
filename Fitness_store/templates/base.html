@@ -11,16 +11,16 @@
 
 <body>
     <header>
-        <h1><a href="#">Pure Strength</a></h1>
+        <h1><a href="{% url 'homepage' %}">Pure Strength</a></h1>
     </header>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'about us' %}">About us</a>
         <a href="#">Supplements</a>
         <a href="#">Gym equipment</a>
         <a href="#">Contact</a>
-        <a href="#"> Login</a>
+        <a href="#">Login</a>
         <a href="#">Register</a>
     </nav>
 
