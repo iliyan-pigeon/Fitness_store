@@ -15,3 +15,11 @@
     align-items: center;
     justify-content: center;
 }
+.block {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
+}
+.products-supplements {
+    display: block;
+}
