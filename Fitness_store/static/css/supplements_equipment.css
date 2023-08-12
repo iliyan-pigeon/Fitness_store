@@ -23,3 +23,17 @@
 .products-supplements {
     display: block;
 }
+.my-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.my-button:hover {
+    background-color: #333;
+}
