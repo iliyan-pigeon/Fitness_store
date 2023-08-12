@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="about-us-image-container">
+    <img class="about-us-image" src="{% static 'images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg' %}" alt="About Us Image">
+    <div class="about-us-hero-content">
+        <h2><a href="{% url 'about us' %}">Contacts</a></h2>
+        <p>OFFICE: Iliyan Galabov street 7, Sofia, Bulgaria </p>
+        <p>E-MAIL: pure_strength@gmail.com</p>
+        <p>INSTAGRAM: PureStrength</p>
+        <p>FACEBOOK: Pure Strength</p>
+        <p>PHONE NUMBER: +359123456789</p>
+
+    </div>
+  </div>
+{% endblock %}
