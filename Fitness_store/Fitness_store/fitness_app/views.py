@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView
-from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment
+from django.views.generic import TemplateView, ListView
+from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
 
 
 class HomePageView(TemplateView):
@@ -20,20 +20,14 @@ class AboutUsPageView(TemplateView):
         return context
 
 
-class SupplementsPageView(TemplateView):
+class SupplementsPageView(ListView):
+    model = Supplements
     template_name = 'supplements.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
-
-class GymEquipmentPageView(TemplateView):
+class GymEquipmentPageView(ListView):
+    model = GymEquipment
     template_name = 'gym_equipment.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class ContactsPageView(TemplateView):

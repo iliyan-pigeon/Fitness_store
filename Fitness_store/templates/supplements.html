@@ -5,93 +5,41 @@
     <div class="supplements-container" id="products">
         <h2>SUPPLEMENTS</h2>
         <div class="products-supplements">
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/istockphoto-1200872324-1024x1024.jpg' %}" alt="Service 1">
-                <h3>Whey protein</h3>
-                <div class="product-container">
-                <p>Amount: 2 kg.</p>
-                <p>Price: 130 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/istockphoto-1383504099-1024x1024.jpg' %}" alt="Service 2">
-                <h3>Creatine</h3>
-                <div class="product-container">
-                <p>Amount: 0.5 kg.</p>
-                <p>Price: 40 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/istockphoto-1185682437-1024x1024.jpg' %}" alt="Service 3">
-                <h3>BCAA</h3>
-                <div class="product-container">
-                <p>Amount: 60 tablets</p>
-                <p>Price: 25 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1136365957-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Ashwagandha</h3>
-                <div class="product-container">
-                <p>Amount: 60 tablets</p>
-                <p>Price: 35 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-519036974-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Magnesium</h3>
-                <div class="product-container">
-                <p>Amount: 90 tablets</p>
-                <p>Price: 30 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1270699634-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Zinc</h3>
-                <div class="product-container">
-                <p>Amount: 90 tablets</p>
-                <p>Price: 32 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1280398620-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Glutamine</h3>
-                <div class="product-container">
-                <p>Amount: 90 tablets</p>
-                <p>Price: 25 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1165030372-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Omega 3</h3>
-                <div class="product-container">
-                <p>Amount: 90 tablets</p>
-                <p>Price: 33 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-520371514-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Vitamin D</h3>
-                <div class="product-container">
-                <p>Amount: 90 tablets</p>
-                <p>Price: 36 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
+            {% for supplement in object_list %}
+                {% if supplement.id == 1 or supplement.id == 4 or supplement.id == 7 %}
+                    <div class="block">
+                    <a href="{% url 'product' %}" class="products-item">
+                        <img src="{{ supplement.photo.url }}" alt="Service 1">
+                        <h3>{{ supplement.name }}</h3>
+                        <div class="product-container">
+                        <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
+                        <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                        </div>
+                        <button class="my-button">Add to cart</button>
+                    </a>
+                {% elif supplement.id == 3 or supplement.id == 6 or supplement.id == 9 %}
+                        <a href="{% url 'product' %}" class="products-item">
+                            <img src="{{ supplement.photo.url }}" alt="Service 1">
+                            <h3>{{ supplement.name }}</h3>
+                            <div class="product-container">
+                            <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
+                            <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                            </div>
+                            <button class="my-button">Add to cart</button>
+                        </a>
+                        </div>
+                {% else %}
+                    <a href="{% url 'product' %}" class="products-item">
+                        <img src="{{ supplement.photo.url }}" alt="Service 1">
+                        <h3>{{ supplement.name }}</h3>
+                        <div class="product-container">
+                        <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
+                        <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                        </div>
+                        <button class="my-button">Add to cart</button>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 

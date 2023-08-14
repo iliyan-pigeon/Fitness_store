@@ -5,78 +5,32 @@
     <div class="supplements-container" id="products">
         <h2>Gym equipment</h2>
         <div class="products-supplements">
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/pexels-dom-j-45056.jpg' %}" alt="Service 1">
-                <h3>Skipping rope</h3>
-                <p>Price: 10 lv.</p>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/istockphoto-1371570040-1024x1024.jpg' %}" alt="Service 2">
-                <h3>Weightlifting straps</h3>
-                <p>Price: 12 lv.</p>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/../media/istockphoto-1320847570-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Shaker</h3>
-                <p>Price: 8 lv.</p>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-910481538-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Weightlifting belt</h3>
-                <div class="product-container">
-                <p>Price: 80 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1191769984-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Weightlifting gloves</h3>
-                <div class="product-container">
-                <p>Price: 17 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1295784856-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Training band</h3>
-                <div class="product-container">
-                <p>Price: 7 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
-            <div class="block">
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1210466225-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Knee pads</h3>
-                <div class="product-container">
-                <p>Price: 20 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1276475534-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Dumbbells</h3>
-                <div class="product-container">
-                <p>Price: 40 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            <a href="{% url 'product' %}" class="products-item">
-                <img src="{% static 'images/istockphoto-1387575602-1024x1024.jpg' %}" alt="Service 3">
-                <h3>Kettlebell</h3>
-                <div class="product-container">
-                <p>Price: 35 lv.</p>
-                </div>
-                <button class="my-button">Add to cart</button>
-            </a>
-            </div>
+            {% for equipment in object_list %}
+                {% if equipment.id == 1 or equipment.id == 4 or equipment.id == 7 %}
+                    <div class="block">
+                        <a href="{% url 'product' %}" class="products-item">
+                            <img src="{{ equipment.photo.url }}" alt="Service 1">
+                            <h3>{{ equipment.name }}</h3>
+                            <p>Price: {{ equipment.price }} lv.</p>
+                            <button class="my-button">Add to cart</button>
+                        </a>
+                {% elif equipment.id == 3 or equipment.id == 6 or equipment.id == 9 %}
+                        <a href="{% url 'product' %}" class="products-item">
+                            <img src="{{ equipment.photo.url }}" alt="Service 1">
+                            <h3>{{ equipment.name }}</h3>
+                            <p>Price: {{ equipment.price }} lv.</p>
+                            <button class="my-button">Add to cart</button>
+                        </a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'product' %}" class="products-item">
+                        <img src="{{ equipment.photo.url }}" alt="Service 1">
+                        <h3>{{ equipment.name }}</h3>
+                        <p>Price: {{ equipment.price }} lv.</p>
+                        <button class="my-button">Add to cart</button>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
