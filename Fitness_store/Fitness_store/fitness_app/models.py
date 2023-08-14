@@ -25,7 +25,7 @@ class BestSellingSupplements(models.Model):
     photo = models.FileField(
         null=False,
         blank=False,
-        upload_to='images/'
+        upload_to='best_products_images'
     )
 
 
@@ -52,5 +52,5 @@ class BestSellingGymEquipment(models.Model):
     photo = models.FileField(
         null=False,
         blank=False,
-        upload_to='images/'
+        upload_to='best_products_images'
     )

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=30, validators=[django.core.validators.MinLengthValidator(2)])),
                 ('description', models.TextField(max_length=300, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('photo', models.FileField(upload_to='images/')),
+                ('photo', models.FileField(upload_to='images')),
             ],
         ),
         migrations.CreateModel(
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=30, validators=[django.core.validators.MinLengthValidator(2)])),
                 ('description', models.TextField(max_length=300, validators=[django.core.validators.MinLengthValidator(5)])),
-                ('photo', models.FileField(upload_to='images/')),
+                ('photo', models.FileField(upload_to='images')),
             ],
         ),
     ]
