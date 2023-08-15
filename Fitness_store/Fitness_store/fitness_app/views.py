@@ -1,4 +1,8 @@
-from django.views.generic import TemplateView, ListView
+from django.contrib.auth import login
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView
+
+from Fitness_store.fitness_app.forms import CustomUserCreationForm
 from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
 
 
@@ -44,3 +48,14 @@ class ProductPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class ProfileRegisterView(CreateView):
+    template_name = 'register.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        login(self.request, self.object)
+        return result
