@@ -1,5 +1,6 @@
 from django.contrib import admin
-from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
+from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment, \
+    CustomUser
 
 
 @admin.register(BestSellingSupplements)
@@ -19,4 +20,9 @@ class Supplements(admin.ModelAdmin):
 
 @admin.register(GymEquipment)
 class GymEquipment(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CustomUser)
+class CustomUser(admin.ModelAdmin):
     pass
