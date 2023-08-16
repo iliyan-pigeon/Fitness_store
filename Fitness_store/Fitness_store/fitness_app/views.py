@@ -1,10 +1,7 @@
-from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
-
-from Fitness_store.fitness_app.forms import CustomUserCreationForm
 from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
 
 
@@ -52,29 +49,18 @@ class ProductPageView(TemplateView):
         return context
 
 
-class ProfileRegisterView(CreateView):
-    template_name = 'register.html'
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('homepage')
-
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        login(self.request, self.object)
-        return result
-
-
-class ProfileLoginView(LoginView):
-    template_name = 'register.html'
-    redirect_authenticated_user = True
-
-    def get_success_url(self):
-        return reverse_lazy('homepage')
-
-
-#def option_logout(request):
-#    return render(request, 'profiles/logout.html')
+#class ProfileRegisterView(CreateView):
+#    template_name = 'register.html'
+#    form_class = CustomUserCreationForm
+#    success_url = reverse_lazy('homepage')
+#
+#    def form_valid(self, form):
+#        result = super().form_valid(form)
+#        login(self.request, self.object)
+#        return result
 #
 #
-#def logout_view(request):
-#    logout(request)
-#    return redirect('login')
+#class ProfileLoginView(LoginView):
+#    template_name = 'register.html'
+#    form_class = LoginForm
+#    success_url = reverse_lazy('homepage')
