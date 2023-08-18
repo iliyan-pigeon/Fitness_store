@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, FormView
+from django.views.generic import TemplateView, ListView, CreateView, FormView, DetailView
 
 from Fitness_store.fitness_app.forms import RegisterForm, LoginForm
 from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
@@ -43,12 +43,10 @@ class ContactsPageView(TemplateView):
         return context
 
 
-class ProductPageView(TemplateView):
+class EquipmentProductPageView(DetailView):
+    model = GymEquipment
     template_name = 'product.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class ProfileRegisterView(FormView):
