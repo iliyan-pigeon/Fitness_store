@@ -45,8 +45,12 @@ class ContactsPageView(TemplateView):
 
 class EquipmentProductPageView(DetailView):
     model = GymEquipment
-    template_name = 'product.html'
+    template_name = 'equipment_product.html'
 
+
+class SupplementProductPageView(DetailView):
+    model = Supplements
+    template_name = 'supplement_product.html'
 
 
 class ProfileRegisterView(FormView):
