@@ -1,9 +1,10 @@
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView, FormView, DetailView
 
-from Fitness_store.fitness_app.forms import RegisterForm, LoginForm
+from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
 from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
 
 
@@ -53,10 +54,15 @@ class SupplementProductPageView(DetailView):
     template_name = 'supplement_product.html'
 
 
-class ProfileRegisterView(FormView):
+class RegisterUserView(CreateView):
     template_name = 'register.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('login')
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        login(self.request, self.object)
+        return result
 
 
 class ProfileLoginView(LoginView):
