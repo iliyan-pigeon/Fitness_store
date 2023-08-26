@@ -1,6 +1,10 @@
 from django.core import validators
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import models as auth_models
+
+
+def validate_only_alphabetical(value):
+    pass
 
 
 class BestSellingSupplements(models.Model):
@@ -116,3 +120,45 @@ class GymEquipment(models.Model):
     )
 
 
+class FitnessUser(auth_models.AbstractUser):
+    FIRST_NAME_MIN_LENGTH = 2
+    FIRST_NAME_MAX_LENGTH = 30
+    LAST_NAME_MIN_LENGTH = 2
+    LAST_NAME_MAX_LENGTH = 30
+    GENDER_CHOICES = (
+        ("M", "Male"),
+        ("F", "Female"),
+        ("O", "Other"),
+    )
+    GENDER_MAX_LENGTH = 1
+
+    first_name = models.CharField(
+        max_length=FIRST_NAME_MAX_LENGTH,
+        validators=(
+            validators.MinLengthValidator(FIRST_NAME_MIN_LENGTH),
+            validate_only_alphabetical,
+        ),
+
+    )
+
+    last_name = models.CharField(
+        max_length=LAST_NAME_MAX_LENGTH,
+        validators=(
+            validators.MinLengthValidator(LAST_NAME_MIN_LENGTH),
+            validate_only_alphabetical,
+        ),
+    )
+
+    email = models.EmailField(
+        unique=True,
+    )
+
+    gender = models.CharField(
+        max_length=GENDER_MAX_LENGTH,
+        choices=GENDER_CHOICES,
+    )
+
+    profile_picture = models.FileField(
+        null=True,
+        blank=True,
+    )
