@@ -1,14 +1,14 @@
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import views as auth_views
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, FormView, DetailView
+from django.views import generic as views
 
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
 from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
 
 
-class HomePageView(TemplateView):
+class HomePageView(views.TemplateView):
     template_name = 'homepage.html'
 
     def get_context_data(self, **kwargs):
@@ -18,7 +18,7 @@ class HomePageView(TemplateView):
         return context
 
 
-class AboutUsPageView(TemplateView):
+class AboutUsPageView(views.TemplateView):
     template_name = 'about_us.html'
 
     def get_context_data(self, **kwargs):
@@ -26,17 +26,17 @@ class AboutUsPageView(TemplateView):
         return context
 
 
-class SupplementsPageView(ListView):
+class SupplementsPageView(views.ListView):
     model = Supplements
     template_name = 'supplements.html'
 
 
-class GymEquipmentPageView(ListView):
+class GymEquipmentPageView(views.ListView):
     model = GymEquipment
     template_name = 'gym_equipment.html'
 
 
-class ContactsPageView(TemplateView):
+class ContactsPageView(views.TemplateView):
     template_name = 'contacts.html'
 
     def get_context_data(self, **kwargs):
@@ -44,17 +44,17 @@ class ContactsPageView(TemplateView):
         return context
 
 
-class EquipmentProductPageView(DetailView):
+class EquipmentProductPageView(views.DetailView):
     model = GymEquipment
     template_name = 'equipment_product.html'
 
 
-class SupplementProductPageView(DetailView):
+class SupplementProductPageView(views.DetailView):
     model = Supplements
     template_name = 'supplement_product.html'
 
 
-class RegisterUserView(CreateView):
+class RegisterUserView(views.CreateView):
     template_name = 'register.html'
     form_class = RegisterUserForm
     success_url = reverse_lazy('')
@@ -65,7 +65,10 @@ class RegisterUserView(CreateView):
         return result
 
 
-class ProfileLoginView(LoginView):
+class LoginUserView(auth_views.LoginView):
     template_name = 'login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('homepage')
+
+
+class LogoutUserView(auth_views.LogoutView):
+    pass

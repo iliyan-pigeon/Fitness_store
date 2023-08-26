@@ -1,8 +1,8 @@
 from django.urls import path, include
 
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
-    ContactsPageView, ProfileLoginView, EquipmentProductPageView, SupplementProductPageView, \
-    RegisterUserView
+    ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
+    RegisterUserView, LogoutUserView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('equipment_product/', EquipmentProductPageView.as_view(), name='equipment_product'),
     path('supplement_product', SupplementProductPageView.as_view(), name='supplement_product'),
     path('register/', RegisterUserView.as_view(), name='register'),
-    path('login/', ProfileLoginView.as_view(), name='login'),
+    path('login/', LoginUserView.as_view(), name='login'),
+    path('logout/', LogoutUserView.as_view(), name='logout'),
 ]

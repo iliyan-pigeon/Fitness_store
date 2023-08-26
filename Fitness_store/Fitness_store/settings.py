@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 from django.template.context_processors import media
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,3 +137,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'fitness_app.FitnessUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy('homepage')
+
+LOGOUT_REDIRECT_URL = reverse_lazy('homepage')
