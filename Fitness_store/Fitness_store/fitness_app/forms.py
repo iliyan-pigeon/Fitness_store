@@ -10,7 +10,7 @@ class RegisterUserForm(auth_forms.UserCreationForm):
 
     class Meta:
         model = UserModel
-        fields = ['username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'gender']
+        fields = ['username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'gender', 'profile_picture']
 
 
 class LoginForm(auth_forms.AuthenticationForm):

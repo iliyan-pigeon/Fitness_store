@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
-from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
+from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment, \
+    FitnessUser
 
 
 class HomePageView(views.TemplateView):
@@ -81,3 +82,8 @@ class LoginUserView(auth_views.LoginView):
 
 class LogoutUserView(auth_views.LogoutView):
     pass
+
+
+class ProfileDetailView(views.DetailView):
+    model = FitnessUser
+    template_name = 'profile_details.html'
