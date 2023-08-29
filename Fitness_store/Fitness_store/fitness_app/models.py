@@ -161,4 +161,6 @@ class FitnessUser(auth_models.AbstractUser):
     profile_picture = models.FileField(
         null=True,
         blank=True,
+        upload_to='profile_pictures',
+        default=None,
     )

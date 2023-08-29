@@ -1,12 +1,14 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.shortcuts import render, redirect
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
-
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
-from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment, \
-    FitnessUser
+from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
+
+
+UserModel = get_user_model()
 
 
 class HomePageView(views.TemplateView):
@@ -85,5 +87,24 @@ class LogoutUserView(auth_views.LogoutView):
 
 
 class ProfileDetailView(views.DetailView):
-    model = FitnessUser
+    model = UserModel
     template_name = 'profile_details.html'
+
+    def get_context_data(self, **kwargs):
+        profile_picture = static('images/istockphoto-1433039224-1024x1024.jpg')
+
+        if self.object.profile_picture is not None:
+            profile_picture = self.object.profile_picture
+
+        context = super().get_context_data(**kwargs)
+        context[profile_picture] = profile_picture
+
+        return context
+
+
+class ProfileEditView(views.UpdateView):
+    pass
+
+
+class ProfileDeleteView(views.DeleteView):
+    pass

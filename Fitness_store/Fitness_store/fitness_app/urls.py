@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
-    RegisterUserView, LogoutUserView, ProfileDetailView
+    RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -15,5 +15,9 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
     path('login/', LoginUserView.as_view(), name='login'),
     path('logout/', LogoutUserView.as_view(), name='logout'),
-    path('profile_detail/', ProfileDetailView.as_view(), name='profile detail'),
+    path('profile_detail/<int:pk>/', include([
+        path('', ProfileDetailView.as_view(), name='profile detail'),
+        path('edit/', ProfileEditView.as_view(), name='profile edit'),
+        path('delete/', ProfileDeleteView.as_view(), name='profile delete')
+    ])),
 ]
