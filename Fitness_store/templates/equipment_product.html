@@ -2,11 +2,16 @@
 {% block content %}
 {% load static %}
 
-<img src="{% static 'images/../media/istockphoto-1200872324-1024x1024.jpg' %}" alt="Service 1">
-<h3>Whey protein</h3>
-<div class="product-container">
-    <p>Amount: 2 kg.</p>
-    <p>Price: 130 lv.</p>
+<div class="single-product-container">
+<div class="single-product-item">
+    <h2>{{ object.name }}</h2>
+    <img src="{{ object.photo.url }}" alt="photo">
+    <p>{{ object.description }}</p>
+    <div class="product-container">
+        <p>Price: {{ object.price|floatformat:2 }} lv.</p>
+    </div>
+    <button class="my-button">Add to cart</button>
 </div>
-<button class="my-button">Add to cart</button>
+</div>
+
 {% endblock %}
