@@ -11,14 +11,14 @@
                         <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
-                            <p>Price: {{ equipment.price }} lv.</p>
+                            <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
                             <button class="my-button">Add to cart</button>
                         </a>
                 {% elif equipment.id == 3 or equipment.id == 6 or equipment.id == 9 %}
                         <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
-                            <p>Price: {{ equipment.price }} lv.</p>
+                            <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
                             <button class="my-button">Add to cart</button>
                         </a>
                     </div>
@@ -26,7 +26,7 @@
                     <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                         <img src="{{ equipment.photo.url }}" alt="Service 1">
                         <h3>{{ equipment.name }}</h3>
-                        <p>Price: {{ equipment.price }} lv.</p>
+                        <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
                         <button class="my-button">Add to cart</button>
                     </a>
                 {% endif %}
