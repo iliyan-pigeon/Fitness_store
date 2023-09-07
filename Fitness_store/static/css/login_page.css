@@ -1,0 +1,33 @@
+body {
+    background-color: #444444;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.login-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    border: 2px solid white;
+    width: 50rem;
+    padding-bottom: 1rem;
+}
+.login-item form div{
+    padding-bottom: 1rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+}
