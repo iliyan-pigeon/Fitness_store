@@ -5,7 +5,7 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
-from Fitness_store.fitness_app.models import BestSellingSupplements, BestSellingGymEquipment, Supplements, GymEquipment
+from Fitness_store.fitness_app.models import Supplements, GymEquipment
 
 
 UserModel = get_user_model()
@@ -16,8 +16,8 @@ class HomePageView(views.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['best_selling_supplements'] = BestSellingSupplements.objects.all()
-        context['best_selling_gym_equipment'] = BestSellingGymEquipment.objects.all()
+        context['best_selling_supplements'] = Supplements.objects.filter(best_selling=True)
+        context['best_selling_gym_equipment'] = GymEquipment.objects.filter(best_selling=True)
         return context
 
 

@@ -15,7 +15,7 @@
         <h2>BEST SELLING SUPPLEMENTS</h2>
         <div class="products">
             {% for supplement in best_selling_supplements %}
-                <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
+                <a href="{% url 'supplements' %}" class="products-item">
                 <img src="{{  supplement.photo.url }}" alt="Service 1">
                 <h3>{{ supplement.name }}</h3>
                 <p>{{ supplement.description }}</p>
@@ -28,7 +28,7 @@
         <h2>BEST SELLING GYM EQUIPMENT</h2>
         <div class="products">
             {% for equipment in best_selling_gym_equipment %}
-            <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
+            <a href="{% url 'gym equipment' %}" class="products-item">
                 <img src="{{ equipment.photo.url }}" alt="Service 1">
                 <h3>{{ equipment.name }}</h3>
                 <p>{{ equipment.description }}</p>

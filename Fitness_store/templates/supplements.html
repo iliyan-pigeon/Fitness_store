@@ -8,7 +8,7 @@
             {% for supplement in object_list %}
                 {% if supplement.id == 1 or supplement.id == 4 or supplement.id == 7 %}
                     <div class="block">
-                    <a href="{% url 'product' %}" class="products-item">
+                    <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
                         <img src="{{ supplement.photo.url }}" alt="Service 1">
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">
@@ -18,7 +18,7 @@
                         <button class="my-button">Add to cart</button>
                     </a>
                 {% elif supplement.id == 3 or supplement.id == 6 or supplement.id == 9 %}
-                        <a href="{% url 'product' %}" class="products-item">
+                        <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
                             <img src="{{ supplement.photo.url }}" alt="Service 1">
                             <h3>{{ supplement.name }}</h3>
                             <div class="product-container">
@@ -29,7 +29,7 @@
                         </a>
                         </div>
                 {% else %}
-                    <a href="{% url 'product' %}" class="products-item">
+                    <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
                         <img src="{{ supplement.photo.url }}" alt="Service 1">
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">

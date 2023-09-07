@@ -7,60 +7,6 @@ def validate_only_alphabetical(value):
     pass
 
 
-class BestSellingSupplements(models.Model):
-
-    name = models.CharField(
-        null=False,
-        blank=False,
-        max_length=30,
-        validators=(
-            validators.MinLengthValidator(2),
-        ),
-    )
-
-    description = models.TextField(
-        null=False,
-        blank=False,
-        max_length=300,
-        validators=(
-            validators.MinLengthValidator(5),
-        ),
-    )
-
-    photo = models.FileField(
-        null=False,
-        blank=False,
-        upload_to='best_products_images'
-    )
-
-
-class BestSellingGymEquipment(models.Model):
-
-    name = models.CharField(
-        null=False,
-        blank=False,
-        max_length=30,
-        validators=(
-            validators.MinLengthValidator(2),
-        ),
-    )
-
-    description = models.TextField(
-        null=False,
-        blank=False,
-        max_length=300,
-        validators=(
-            validators.MinLengthValidator(5),
-        ),
-    )
-
-    photo = models.FileField(
-        null=False,
-        blank=False,
-        upload_to='best_products_images'
-    )
-
-
 class Supplements(models.Model):
 
     name = models.CharField(
@@ -70,6 +16,21 @@ class Supplements(models.Model):
         validators=(
             validators.MinLengthValidator(2),
         ),
+    )
+
+    description = models.TextField(
+        null=False,
+        blank=False,
+        max_length=300,
+        validators=(
+            validators.MinLengthValidator(5),
+        ),
+    )
+
+    best_selling = models.BooleanField(
+        null=False,
+        blank=False,
+        default=False,
     )
 
     amount = models.IntegerField(
@@ -105,6 +66,21 @@ class GymEquipment(models.Model):
         validators=(
             validators.MinLengthValidator(2),
         ),
+    )
+
+    description = models.TextField(
+        null=False,
+        blank=False,
+        max_length=300,
+        validators=(
+            validators.MinLengthValidator(5),
+        ),
+    )
+
+    best_selling = models.BooleanField(
+        null=False,
+        blank=False,
+        default=False,
     )
 
     price = models.FloatField(
