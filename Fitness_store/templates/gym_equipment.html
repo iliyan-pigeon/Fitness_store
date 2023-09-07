@@ -8,14 +8,14 @@
             {% for equipment in object_list %}
                 {% if equipment.id == 1 or equipment.id == 4 or equipment.id == 7 %}
                     <div class="block">
-                        <a href="{% url 'product' %}" class="products-item">
+                        <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price }} lv.</p>
                             <button class="my-button">Add to cart</button>
                         </a>
                 {% elif equipment.id == 3 or equipment.id == 6 or equipment.id == 9 %}
-                        <a href="{% url 'product' %}" class="products-item">
+                        <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price }} lv.</p>
@@ -23,7 +23,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <a href="{% url 'product' %}" class="products-item">
+                    <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                         <img src="{{ equipment.photo.url }}" alt="Service 1">
                         <h3>{{ equipment.name }}</h3>
                         <p>Price: {{ equipment.price }} lv.</p>

@@ -30,11 +30,12 @@
         <h2>BEST SELLING GYM EQUIPMENT</h2>
         <div class="products">
             {% for equipment in best_selling_gym_equipment %}
-            <a href="{% url 'gym equipment' %}" class="products-item">
-                <img src="{{ equipment.photo.url }}" alt="Service 1">
-                <h3>{{ equipment.name }}</h3>
-                <p>{{ equipment.description }}</p>
-            </a>
+                <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
+                    <img src="{{ equipment.photo.url }}" alt="Service 1">
+                    <h3>{{ equipment.name }}</h3>
+                    <p>Price: {{ equipment.price }} lv.</p>
+                    <button class="my-button">Add to cart</button>
+                </a>
             {% endfor %}
         </div>
     </div>
