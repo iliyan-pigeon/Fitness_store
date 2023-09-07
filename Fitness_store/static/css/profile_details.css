@@ -1,0 +1,34 @@
+body {
+    background-color: #444444;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    border: 2px solid white;
+    width: 50rem;
+    padding-bottom: 1rem;
+}
+
+.profile-item img {
+    max-width: 20rem;
+}
+
+.profile-item p {
+    max-width: 30rem;
+    text-align: center;
+    border: 2px solid white;
+    padding: 1rem;
+}

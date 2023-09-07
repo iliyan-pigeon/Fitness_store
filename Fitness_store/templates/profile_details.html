@@ -2,10 +2,19 @@
 {% block content %}
 {% load static %}
 
-    <img src="{{ request.user.profile_picture }}" alt="Service 1">
-    <h3>{{ request.user.username }}</h3>
-    <p>{{ request.user.email }}</p>
-    <p>{{ request.user.first_name }}</p>
-    <p>{{ request.user.last_name }}</p>
-    <p>{{ request.user.gender }}</p>
+<div class="profile-container">
+    <div class="profile-item">
+    <h2>{{ request.user.username }}</h2>
+    {% if request.user.profile_picture %}
+        <img src="{{ request.user.profile_picture }}" alt="Service 1">
+    {% else %}
+        <img src="{% static 'images/istockphoto-1433039224-1024x1024.jpg' %}">
+    {% endif %}
+    <p>Username: {{ request.user.username }}</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>First name: {{ request.user.first_name }}</p>
+    <p>Last name: {{ request.user.last_name }}</p>
+    <p>Gender: {{ request.user.gender }}</p>
+    </div>
+</div>
 {% endblock %}
