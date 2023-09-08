@@ -7,7 +7,22 @@ header {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.header-container h1 {
+    margin: 0 auto;
+}
+.material-symbols-outlined {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 nav {
     background-color: #444;
@@ -33,4 +48,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1rem;
+}
+.material-symbols-outlined {
+    color: white;
 }
