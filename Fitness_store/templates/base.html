@@ -14,9 +14,28 @@
     <header>
         <div class="header-container">
         <h1><a href="{% url 'homepage' %}">Pure Strength</a></h1>
-            <span class="material-symbols-outlined">
-            <a href="#">shopping_basket</a>
+        <div class="cart-container">
+            <span class="material-symbols-outlined cart-icon">
+                <a href="#" onclick="toggleCart()">shopping_basket</a>
             </span>
+            <div id="cart-dropdown" class="cart-dropdown">
+                <ul class="cart-items">
+                    <!-- Example cart item -->
+                    <li class="cart-item">
+                        <span class="cart-item-title">Product 1</span>
+                        <span class="cart-item-quantity">x1</span>
+                    </li>
+                    <!-- Example cart item -->
+                    <li class="cart-item">
+                        <span class="cart-item-title">Product 2</span>
+                        <span class="cart-item-quantity">x2</span>
+                    </li>
+                </ul>
+                <div class="cart-total">
+                    Total: $50.00
+                </div>
+            </div>
+        </div>
         </div>
     </header>
 
@@ -45,6 +64,17 @@
     <footer>
         <p>&copy; 2023 Pure Strength. All rights reserved.</p>
     </footer>
+
+    <script>
+    function toggleCart() {
+        let cartDropdown = document.getElementById("cart-dropdown");
+        if (cartDropdown.style.display === "block") {
+            cartDropdown.style.display = "none";
+        } else {
+            cartDropdown.style.display = "block";
+        }
+    }
+</script>
 </body>
 
 </html>
