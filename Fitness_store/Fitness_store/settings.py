@@ -15,6 +15,7 @@ from pathlib import Path
 from django.template.context_processors import media
 from django.urls import reverse_lazy
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Fitness_store.fitness_app.context_processors.cart_context'
             ],
         },
     },
