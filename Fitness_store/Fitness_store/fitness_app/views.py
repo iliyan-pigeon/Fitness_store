@@ -1,5 +1,6 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.templatetags.static import static
 from django.urls import reverse_lazy
@@ -108,3 +109,6 @@ class ProfileEditView(views.UpdateView):
 
 class ProfileDeleteView(views.DeleteView):
     pass
+
+
+

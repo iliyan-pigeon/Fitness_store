@@ -15,26 +15,26 @@
         <div class="header-container">
         <h1><a href="{% url 'homepage' %}">Pure Strength</a></h1>
         <div class="cart-container">
-            <span class="material-symbols-outlined cart-icon">
-                <a href="#" onclick="toggleCart()">shopping_basket</a>
-            </span>
-            <div id="cart-dropdown" class="cart-dropdown">
-                <ul class="cart-items">
-                    <!-- Example cart item -->
+        <span class="material-symbols-outlined cart-icon">
+            <a href="#" onclick="toggleCart()">shopping_basket</a>
+        </span>
+        <div id="cart-dropdown" class="cart-dropdown">
+            <ul class="cart-items">
+                <!-- Loop through cart items using Django template tags -->
+                {% for item in cart_items %}
                     <li class="cart-item">
-                        <span class="cart-item-title">Product 1</span>
-                        <span class="cart-item-quantity">x1</span>
+                        <span class="cart-item-title">{{ item.product.name }}</span>
+                        <span class="cart-item-quantity">x{{ item.quantity }}</span>
                     </li>
-                    <!-- Example cart item -->
-                    <li class="cart-item">
-                        <span class="cart-item-title">Product 2</span>
-                        <span class="cart-item-quantity">x2</span>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    Total: $50.00
-                </div>
+                {% empty %}
+                    <!-- Display "Shopping cart is empty" if the cart is empty -->
+                    <li class="cart-item-empty">Shopping cart is empty</li>
+                {% endfor %}
+            </ul>
+            <div class="cart-total">
+                Total: ${{ cart_total }}
             </div>
+        </div>
         </div>
         </div>
     </header>
