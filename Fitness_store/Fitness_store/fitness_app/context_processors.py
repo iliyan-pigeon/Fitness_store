@@ -1,4 +1,4 @@
-from .models import Cart, GymEquipment, Supplements  # Import your Cart model
+from .models import Cart, GymEquipment, Supplements
 
 
 def get_product_price(product_type, product_id):
@@ -12,8 +12,7 @@ def get_product_price(product_type, product_id):
 
         return product.price
     except (GymEquipment.DoesNotExist, Supplements.DoesNotExist):
-        # Handle the case where the product with the given ID doesn't exist
-        return 0  # or raise an exception, return a default value, etc.
+        return 0
 
 
 def cart_context(request):
@@ -21,7 +20,6 @@ def cart_context(request):
     cart_total = 0
 
     if request.user.is_authenticated:
-        # For authenticated users, fetch the user's cart from the database
         cart = Cart.objects.filter(user=request.user).first()
 
         if cart:
@@ -29,7 +27,6 @@ def cart_context(request):
             cart_total = sum(item.price * item.quantity for item in cart_items)
 
     elif 'cart' in request.session:
-        # For guest users, retrieve the cart data from the session
         cart_data = request.session['cart']
 
         for item_data in cart_data:
@@ -37,7 +34,6 @@ def cart_context(request):
             product_id = item_data['product_id']
             quantity = item_data['quantity']
 
-            # Fetch the product price directly from the database based on the product type
             price = get_product_price(product_type, product_id)
 
             cart_items.append({'name': 'Product Name', 'price': price, 'quantity': quantity})
