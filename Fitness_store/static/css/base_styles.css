@@ -60,9 +60,6 @@ footer {
 
 
 
-.cart-container {
-    position: relative;
-}
 
 .cart-icon {
     font-size: 24px;
@@ -120,6 +117,7 @@ footer {
     text-align: center;
     padding: 10px;
     color: #333;
+    font-weight: bold;
 }
 
 /* Dropdown Cart Animation */
