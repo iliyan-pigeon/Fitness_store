@@ -1,13 +1,13 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
-from Fitness_store.fitness_app.models import Supplements, GymEquipment
-
+from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem
+from Fitness_store.fitness_app.utils import get_or_create_cart
 
 UserModel = get_user_model()
 
@@ -111,4 +111,41 @@ class ProfileDeleteView(views.DeleteView):
     pass
 
 
+def add_to_cart(request, product_type, product_id):
+    product = None
+    if product_type == 'supplement':
+        product = get_object_or_404(Supplements, id=product_id)
+    elif product_type == 'gym_equipment':
+        product = get_object_or_404(GymEquipment, id=product_id)
 
+    if product:
+        cart = get_or_create_cart(request)
+
+        cart_item, created = CartItem.objects.get_or_create(
+            cart=cart,
+            name=product.name,
+            price=product.price,
+            defaults={'quantity': 1}
+        )
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
+
+    return redirect('homepage')
+
+
+def remove_from_cart(request, product_type, product_id):
+    product = None
+    if product_type == 'supplement':
+        product = get_object_or_404(Supplements, id=product_id)
+    elif product_type == 'gym_equipment':
+        product = get_object_or_404(GymEquipment, id=product_id)
+
+    if product:
+        cart = get_or_create_cart(request)
+
+        cart_item = CartItem.objects.filter(cart=cart, name=product.name).first()
+        if cart_item:
+            cart_item.delete()
+
+    return redirect('homepage')

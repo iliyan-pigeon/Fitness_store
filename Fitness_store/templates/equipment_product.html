@@ -10,7 +10,10 @@
     <div class="product-container">
         <p>Price: {{ object.price|floatformat:2 }} lv.</p>
     </div>
-    <button class="my-button">Add to cart</button>
+    <form action="{% url 'add to cart' 'gym_equipment' object.id %}" method="post">
+        {% csrf_token %}
+        <button class="my-button">Add to cart</button>
+    </form>
 </div>
 </div>
 

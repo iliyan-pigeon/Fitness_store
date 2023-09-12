@@ -15,7 +15,10 @@
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
-                        <button class="my-button">Add to cart</button>
+                        <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="my-button">Add to cart</button>
+                        </form>
                     </a>
                 {% elif supplement.id == 3 or supplement.id == 6 or supplement.id == 9 %}
                         <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
@@ -25,7 +28,10 @@
                             <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                             <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                             </div>
-                            <button class="my-button">Add to cart</button>
+                            <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="my-button">Add to cart</button>
+                            </form>
                         </a>
                         </div>
                 {% else %}
@@ -36,7 +42,10 @@
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
-                        <button class="my-button">Add to cart</button>
+                        <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="my-button">Add to cart</button>
+                        </form>
                     </a>
                 {% endif %}
             {% endfor %}

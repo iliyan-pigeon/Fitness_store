@@ -12,14 +12,20 @@
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
-                            <button class="my-button">Add to cart</button>
+                            <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="my-button">Add to cart</button>
+                            </form>
                         </a>
                 {% elif equipment.id == 3 or equipment.id == 6 or equipment.id == 9 %}
                         <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
-                            <button class="my-button">Add to cart</button>
+                            <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="my-button">Add to cart</button>
+                            </form>
                         </a>
                     </div>
                 {% else %}
@@ -27,7 +33,10 @@
                         <img src="{{ equipment.photo.url }}" alt="Service 1">
                         <h3>{{ equipment.name }}</h3>
                         <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
-                        <button class="my-button">Add to cart</button>
+                        <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="my-button">Add to cart</button>
+                        </form>
                     </a>
                 {% endif %}
             {% endfor %}

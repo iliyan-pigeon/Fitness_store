@@ -20,7 +20,10 @@
                     <h3>{{ supplement.name }}</h3>
                     <div class="product-container"><p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p><p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                     </div>
-                    <button class="my-button">Add to cart</button>
+                    <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
+                    {% csrf_token %}
+                        <button class="my-button">Add to cart</button>
+                    </form>
                 </a>
             {% endfor %}
         </div>
@@ -34,7 +37,10 @@
                     <img src="{{ equipment.photo.url }}" alt="Service 1">
                     <h3>{{ equipment.name }}</h3>
                     <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
-                    <button class="my-button">Add to cart</button>
+                    <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
+                    {% csrf_token %}
+                        <button class="my-button">Add to cart</button>
+                    </form>
                 </a>
             {% endfor %}
         </div>

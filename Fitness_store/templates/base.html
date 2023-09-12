@@ -24,7 +24,7 @@
                 {% for item in cart_items %}
                     <li class="cart-item">
                         <span class="cart-item-title">{{ item.product.name }}</span>
-                        <span class="cart-item-quantity">x{{ item.quantity }}</span>
+                        <span class="cart-item-quantity">{{ item.quantity }}</span>
                     </li>
                 {% empty %}
                     <!-- Display "Shopping cart is empty" if the cart is empty -->
