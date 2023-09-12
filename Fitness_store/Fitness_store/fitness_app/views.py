@@ -6,7 +6,7 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm
-from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem
+from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
 UserModel = get_user_model()
@@ -88,7 +88,7 @@ class LogoutUserView(auth_views.LogoutView):
 
 
 class ProfileDetailView(views.DetailView):
-    model = UserModel
+    model = FitnessUser
     template_name = 'profile_details.html'
 
     def get_context_data(self, **kwargs):
@@ -104,11 +104,24 @@ class ProfileDetailView(views.DetailView):
 
 
 class ProfileEditView(views.UpdateView):
-    pass
+    model = FitnessUser
+    template_name = 'profile_edit.html'
+    fields = '__all__'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('profile detail')
 
 
 class ProfileDeleteView(views.DeleteView):
-    pass
+    model = FitnessUser
+    template_name = 'profile_delete.html'  # Replace with the template name you prefer
+    success_url = reverse_lazy('logout')  # Redirect to the logout view after deletion
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def add_to_cart(request, product_type, product_id):
