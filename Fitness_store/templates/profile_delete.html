@@ -7,5 +7,5 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
   </form>
-  <a href="{% url 'profile detail' %}">Cancel</a>  <!-- Link to the profile detail view -->
+  <a href="{% url 'profile detail' request.user.pk %}">Cancel</a>  <!-- Link to the profile detail view -->
 {% endblock %}
