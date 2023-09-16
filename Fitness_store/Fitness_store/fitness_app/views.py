@@ -69,14 +69,6 @@ class RegisterUserView(views.CreateView):
         login(self.request, user)
         return result
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next', '')
-        return context
-
-    def get_success_url(self):
-        return self.request.POST.get('next', self.success_url)
-
 
 class LoginUserView(auth_views.LoginView):
     template_name = 'login.html'
