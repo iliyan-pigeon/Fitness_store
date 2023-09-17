@@ -33,3 +33,7 @@ class ProfileEditForm(forms.ModelForm):
         #    'image_url': 'Image URL:',
         #    'age': 'Age:',
         #}
+
+
+class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
+    pass

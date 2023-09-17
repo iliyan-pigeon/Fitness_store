@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
-from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm
+from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
@@ -151,3 +151,17 @@ def remove_from_cart(request, product_type, product_id):
             cart_item.delete()
 
     return redirect('homepage')
+
+
+class PasswordChangeView(auth_views.PasswordChangeView):
+    form_class = CustomPasswordChangeForm
+    template_name = 'password_change.html'
+    success_url = reverse_lazy('password change done')
+
+
+class PasswordChangeDoneView(views.TemplateView):
+    template_name = 'password_change_done.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

@@ -3,7 +3,7 @@ from django.urls import path, include
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
-    remove_from_cart
+    remove_from_cart, PasswordChangeView, PasswordChangeDoneView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -21,4 +21,6 @@ urlpatterns = [
     path('delete/<int:pk>/', ProfileDeleteView.as_view(), name='profile delete'),
     path('add-to-cart/<str:product_type>/<int:product_id>/', add_to_cart, name='add to cart'),
     path('remove-from-cart/<str:product_type>/<int:product_id>/', remove_from_cart, name='remove from cart'),
+    path('password_change/', PasswordChangeView.as_view(), name='password change'),
+    path('password_change/done/', PasswordChangeDoneView.as_view(), name='password change done'),
 ]
