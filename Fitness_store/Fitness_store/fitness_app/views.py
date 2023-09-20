@@ -1,11 +1,13 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import PasswordResetView
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views import generic as views
-from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm
+from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
+    CustomPasswordResetForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
@@ -165,3 +167,10 @@ class PasswordChangeDoneView(views.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    template_name = 'password_reset_form.html'
+    email_template_name = 'password_reset_email.html'  # Create this email template
+    success_url = reverse_lazy('password reset done')
