@@ -172,5 +172,5 @@ class PasswordChangeDoneView(views.TemplateView):
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
     template_name = 'password_reset_form.html'
-    email_template_name = 'password_reset_email.html'  # Create this email template
+    email_template_name = 'password_reset_email.html'
     success_url = reverse_lazy('password reset done')

@@ -1,4 +1,4 @@
-from django.contrib.auth.views import PasswordResetDoneView
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path, include
 
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
@@ -26,4 +26,9 @@ urlpatterns = [
     path('password_change/done/', PasswordChangeDoneView.as_view(), name='password change done'),
     path('password_reset/', CustomPasswordResetView.as_view(), name='password reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(), name='password reset done'),
+    path('reset/<uidb64>/<token>/',
+         PasswordResetConfirmView.as_view(template_name='password_reset_confirm_form.html'),
+         name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
+         name='password_reset_complete'),
 ]

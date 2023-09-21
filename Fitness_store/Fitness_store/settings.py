@@ -143,3 +143,16 @@ AUTH_USER_MODEL = 'fitness_app.FitnessUser'
 LOGIN_REDIRECT_URL = reverse_lazy('homepage')
 
 LOGOUT_REDIRECT_URL = reverse_lazy('homepage')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'milenov556@gmail.com'
+EMAIL_HOST_PASSWORD = '9709i439709i43Pigeon$'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
