@@ -27,7 +27,7 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = UserModel
-        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'profile_picture']
+        fields = ['username', 'first_name', 'last_name', 'email', 'gender', 'profile_picture']
         #labels = {
         #    'first_name': 'First Name:',
         #    'last_name': 'Last Name:',
