@@ -1,10 +1,12 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
     CustomPasswordResetForm
@@ -77,10 +79,12 @@ class LoginUserView(auth_views.LoginView):
     form_class = LoginForm
 
 
+@method_decorator(login_required, name='dispatch')
 class LogoutUserView(auth_views.LogoutView):
     pass
 
 
+@method_decorator(login_required, name='dispatch')
 class ProfileDetailView(views.DetailView):
     model = FitnessUser
     template_name = 'profile_details.html'
@@ -97,6 +101,7 @@ class ProfileDetailView(views.DetailView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class ProfileEditView(views.UpdateView):
     model = UserModel
     form_class = ProfileEditForm
@@ -106,6 +111,7 @@ class ProfileEditView(views.UpdateView):
         return reverse_lazy('profile detail', kwargs={'pk': self.object.pk})
 
 
+@method_decorator(login_required, name='dispatch')
 class ProfileDeleteView(views.DeleteView):
     model = FitnessUser
     template_name = 'profile_delete.html'  # Replace with the template name you prefer
@@ -115,6 +121,7 @@ class ProfileDeleteView(views.DeleteView):
         return self.request.user
 
 
+@method_decorator(login_required, name='dispatch')
 def add_to_cart(request, product_type, product_id):
     product = None
     if product_type == 'supplement':
@@ -138,6 +145,7 @@ def add_to_cart(request, product_type, product_id):
     return redirect('homepage')
 
 
+@method_decorator(login_required, name='dispatch')
 def remove_from_cart(request, product_type, product_id):
     product = None
     if product_type == 'supplement':
@@ -155,12 +163,14 @@ def remove_from_cart(request, product_type, product_id):
     return redirect('homepage')
 
 
+@method_decorator(login_required, name='dispatch')
 class PasswordChangeView(auth_views.PasswordChangeView):
     form_class = CustomPasswordChangeForm
     template_name = 'password_change.html'
     success_url = reverse_lazy('password change done')
 
 
+@method_decorator(login_required, name='dispatch')
 class PasswordChangeDoneView(views.TemplateView):
     template_name = 'password_change_done.html'
 
