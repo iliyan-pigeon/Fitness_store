@@ -121,7 +121,6 @@ class ProfileDeleteView(views.DeleteView):
         return self.request.user
 
 
-@method_decorator(login_required, name='dispatch')
 def add_to_cart(request, product_type, product_id):
     product = None
     if product_type == 'supplement':
@@ -145,7 +144,6 @@ def add_to_cart(request, product_type, product_id):
     return redirect('homepage')
 
 
-@method_decorator(login_required, name='dispatch')
 def remove_from_cart(request, product_type, product_id):
     product = None
     if product_type == 'supplement':

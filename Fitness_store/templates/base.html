@@ -19,16 +19,15 @@
             <a href="#" onclick="toggleCart()">shopping_basket</a>
         </span>
         <div id="cart-dropdown" class="cart-dropdown">
-            <p>Debug: cart_items = {{ cart_items }}</p>
-            <p>Debug: cart_total = {{ cart_total }}</p>
             {% if cart_items %}
                 <ul class="cart-items">
                     {% for item in cart_items %}
                         <li class="cart-item">
                             <span class="cart-item-title">{{ item.name }}</span>
-                            <span class="cart-item-price">Price: {{ item.price }}</span>
-                            <span class="cart-item-quantity">Amount: {{ item.quantity }}</span>
-                            <button>Remove item</button>
+                            <div class="cart-item-details">
+                                <span class="cart-item-price">Price: {{ item.price }}</span>
+                                <span class="cart-item-quantity">Amount: <a href="#" class="plus-minus">-</a>{{ item.quantity }}<a href="#" class="plus-minus">+</a></span>
+                            </div>
                         </li>
                     {% endfor %}
                 </ul>
