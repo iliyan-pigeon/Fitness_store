@@ -162,6 +162,8 @@ class CartItem(models.Model):
     name = models.CharField(max_length=MAX_LENGTH_NAME)
     price = models.DecimalField(max_digits=MAX_DIGITS_PRICE, decimal_places=DECIMAL_PLACES)
     quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
+    product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
+    product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
 
     def __str__(self):
         return f"{self.quantity} x {self.name}"
