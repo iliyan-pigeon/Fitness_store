@@ -27,9 +27,9 @@
                             <div class="cart-item-details">
                                 <span class="cart-item-price">Price: {{ item.price }}</span>
                                 {% if item.product_type == "supplement" %}
-                                    <span class="cart-item-quantity">Amount: <a href="#" class="plus-minus">-</a>{{ item.quantity }}<a href="{% url 'add to cart' "supplement" item.product_id %}" class="plus-minus">+</a></span>
+                                    <span class="cart-item-quantity">Amount: <a href="{% url 'remove from cart' "supplement" item.product_id %}" class="plus-minus">-</a>{{ item.quantity }}<a href="{% url 'add to cart' "supplement" item.product_id %}" class="plus-minus">+</a></span>
                                 {% else %}
-                                    <span class="cart-item-quantity">Amount: <a href="#" class="plus-minus">-</a>{{ item.quantity }}<a href="{% url 'add to cart' "gym_equipment" item.product_id %}" class="plus-minus">+</a></span>
+                                    <span class="cart-item-quantity">Amount: <a href="{% url 'remove from cart' "gym_equipment" item.product_id %}" class="plus-minus">-</a>{{ item.quantity }}<a href="{% url 'add to cart' "gym_equipment" item.product_id %}" class="plus-minus">+</a></span>
                                 {% endif %}
                             </div>
                         </li>
