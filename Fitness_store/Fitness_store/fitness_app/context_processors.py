@@ -26,17 +26,9 @@ def cart_context(request):
             cart_items = cart.cartitem_set.all()
             cart_total = sum(item.price * item.quantity for item in cart_items)
 
-    elif 'cart' in request.session:
-        cart_data = request.session['cart']
-
-        for item_data in cart_data:
-            product_type = item_data['product_type']
-            product_id = item_data['product_id']
-            quantity = item_data['quantity']
-
-            price = get_product_price(product_type, product_id)
-
-            cart_items.append({'name': 'Product Name', 'price': price, 'quantity': quantity})
-            cart_total += price * quantity
+    elif 'cart_id' in request.session:
+        cart_data = Cart.objects.get(id=request.session.get('cart_id')).cartitem_set.all()
+        cart_items = cart_data
+        cart_total = sum(item.price * item.quantity for item in cart_items)
 
     return {'cart_items': cart_items, 'cart_total': cart_total}
