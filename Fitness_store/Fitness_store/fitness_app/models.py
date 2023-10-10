@@ -49,6 +49,11 @@ class Supplements(models.Model):
         blank=False,
     )
 
+    amount_in_stock = models.PositiveIntegerField(
+        null=False,
+        blank=False,
+    )
+
     photo = models.FileField(
         null=False,
         blank=False,
@@ -84,6 +89,11 @@ class GymEquipment(models.Model):
     )
 
     price = models.FloatField(
+        null=False,
+        blank=False,
+    )
+
+    amount_in_stock = models.PositiveIntegerField(
         null=False,
         blank=False,
     )
@@ -164,6 +174,7 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
+    amount_in_stock = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
 
     def __str__(self):
         return f"{self.quantity} x {self.name}"
