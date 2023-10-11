@@ -191,6 +191,12 @@ class CustomPasswordResetView(PasswordResetView):
 
 
 def complete_order(request):
-    all_of_them = Cart.objects.all()
-    print(all_of_them)
+    cart = None
+    if request.user.is_authenticated:
+        cart = Cart.objects.get(user=request.user)
+    else:
+        cart = Cart.objects.get(id=request.session['cart_id'])
+
+    print(cart.id)
+
     return redirect('homepage')
