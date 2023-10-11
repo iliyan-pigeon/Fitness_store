@@ -4,7 +4,7 @@ from django.urls import path, include
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
-    remove_from_cart, PasswordChangeView, PasswordChangeDoneView, CustomPasswordResetView
+    remove_from_cart, PasswordChangeView, PasswordChangeDoneView, CustomPasswordResetView, complete_order
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -31,4 +31,5 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
          name='password_reset_complete'),
+    path('complete_order/', complete_order, name='complete order'),
 ]
