@@ -197,6 +197,7 @@ def complete_order(request):
     else:
         cart = Cart.objects.get(id=request.session['cart_id'])
 
-    print(cart.id)
+    for i in CartItem.objects.filter(cart_id=cart.id):
+        print(i)
 
     return redirect('homepage')
