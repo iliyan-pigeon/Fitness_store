@@ -200,12 +200,12 @@ def complete_order(request):
     for i in CartItem.objects.filter(cart_id=cart.id):
         product = None
         if i.product_type == "supplement":
-            product = Supplements.objects.filter(id=i.product_id)
+            product = Supplements.objects.get(id=i.product_id)
         elif i.product_type == "gym_equipment":
-            product = GymEquipment.objects.filter(id=i.product_id)
+            product = GymEquipment.objects.get(id=i.product_id)
 
-        product.first().amount_in_stock -= i.quantity
-        print(product.first().amount_in_stock)
+        product.amount_in_stock -= i.quantity
+        print(product.amount_in_stock)
         print(i.quantity)
 
     return redirect('homepage')
