@@ -205,7 +205,6 @@ def complete_order(request):
             product = GymEquipment.objects.get(id=i.product_id)
 
         product.amount_in_stock -= i.quantity
-        print(product.amount_in_stock)
-        print(i.quantity)
+        product.save()
 
     return redirect('homepage')
