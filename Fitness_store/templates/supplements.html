@@ -15,10 +15,14 @@
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
+                        {% if supplement.amount_in_stock > 0 %}
                         <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                            {% csrf_token %}
+                        {% csrf_token %}
                             <button class="my-button">Add to cart</button>
                         </form>
+                        {% else %}
+                        <button class="my-button out-of-stock">Out of stock</button>
+                        {% endif %}
                     </a>
                 {% elif supplement.id == 3 or supplement.id == 6 or supplement.id == 9 %}
                         <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
@@ -28,10 +32,14 @@
                             <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                             <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                             </div>
+                            {% if supplement.amount_in_stock > 0 %}
                             <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                                {% csrf_token %}
+                            {% csrf_token %}
                                 <button class="my-button">Add to cart</button>
                             </form>
+                            {% else %}
+                            <button class="my-button out-of-stock">Out of stock</button>
+                            {% endif %}
                         </a>
                         </div>
                 {% else %}
@@ -42,10 +50,14 @@
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
+                        {% if supplement.amount_in_stock > 0 %}
                         <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                            {% csrf_token %}
+                        {% csrf_token %}
                             <button class="my-button">Add to cart</button>
                         </form>
+                        {% else %}
+                        <button class="my-button out-of-stock">Out of stock</button>
+                        {% endif %}
                     </a>
                 {% endif %}
             {% endfor %}

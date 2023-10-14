@@ -37,3 +37,7 @@
 .my-button:hover {
     background-color: #333;
 }
+.out-of-stock {
+    background-color: #3498db;
+    cursor: not-allowed;
+}

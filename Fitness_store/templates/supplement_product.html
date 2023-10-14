@@ -11,10 +11,14 @@
         <p>Amount: {{ object.amount }} {{ object.amount_type }}</p>
         <p>Price: {{ object.price|floatformat:2 }} lv.</p>
     </div>
+    {% if object.amount_in_stock > 0 %}
     <form action="{% url 'add to cart' 'supplement' object.id %}" method="post">
-        {% csrf_token %}
+    {% csrf_token %}
         <button class="my-button">Add to cart</button>
     </form>
+    {% else %}
+        <button class="my-button out-of-stock">Out of stock</button>
+    {% endif %}
 </div>
 </div>
 
