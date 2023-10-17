@@ -139,9 +139,10 @@ def add_to_cart(request, product_type, product_id):
             product_id=product.id,
             product_type=product_type
         )
-        if not created:
-            cart_item.quantity += 1
-            cart_item.save()
+        if cart_item.quantity < product.amount_in_stock:
+            if not created:
+                cart_item.quantity += 1
+                cart_item.save()
 
     return redirect('homepage')
 
