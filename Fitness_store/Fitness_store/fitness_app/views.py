@@ -2,7 +2,7 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
@@ -143,6 +143,9 @@ def add_to_cart(request, product_type, product_id):
             if not created:
                 cart_item.quantity += 1
                 cart_item.save()
+        elif cart_item.quantity >= product.amount_in_stock:
+            error_message = "Item quantity exceeds available stock."
+            return HttpResponseBadRequest(render(request, 'out_of_stock.html', {'error_message': error_message}))
 
     return redirect('homepage')
 

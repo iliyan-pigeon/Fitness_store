@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if error_message %}
+    <div class="error-message">
+        {{ error_message }}
+        <a href="javascript:history.back()">
+            <button>Go back</button>
+        </a>
+    </div>
+{% endif %}
+{% endblock %}
