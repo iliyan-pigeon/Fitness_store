@@ -211,4 +211,6 @@ def complete_order(request):
         product.amount_in_stock -= i.quantity
         product.save()
 
+    cart.delete()
+
     return redirect('homepage')
