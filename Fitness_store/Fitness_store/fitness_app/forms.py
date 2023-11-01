@@ -42,3 +42,7 @@ class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
 
 class CustomPasswordResetForm(PasswordResetForm):
     pass
+
+
+class ProductSearchForm(forms.Form):
+    search_query = forms.CharField(max_length=100, label='Search')

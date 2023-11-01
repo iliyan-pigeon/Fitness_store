@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    CustomPasswordResetForm
+    CustomPasswordResetForm, ProductSearchForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
@@ -214,3 +214,39 @@ def complete_order(request):
     cart.delete()
 
     return redirect('homepage')
+
+
+def search_products(request):
+    if request.method == 'GET':
+        form = ProductSearchForm(request.GET)
+        if form.is_valid():
+            search_query = form.cleaned_data['search_query']
+            supplements = Supplements.objects.filter(name__icontains=search_query)
+            gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
+            # You can also return these results to your template
+            return render(request, {'supplements': supplements, 'gym_equipment': gym_equipment})
+    else:
+        form = ProductSearchForm()
+    return render(request, 'search.html', {'form': form})
+
+
+#def purchase(request):
+#    cart = None
+#    if request.user.is_authenticated:
+#        cart = Cart.objects.get(user=request.user)
+#    else:
+#        cart = Cart.objects.get(id=request.session['cart_id'])
+#
+#    for i in CartItem.objects.filter(cart_id=cart.id):
+#        product = None
+#        if i.product_type == "supplement":
+#            product = Supplements.objects.get(id=i.product_id)
+#        elif i.product_type == "gym_equipment":
+#            product = GymEquipment.objects.get(id=i.product_id)
+#
+#        product.amount_in_stock -= i.quantity
+#        product.save()
+#
+#    cart.delete()
+#
+#    return redirect('homepage')

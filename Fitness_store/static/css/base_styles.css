@@ -56,11 +56,6 @@ footer {
 .material-symbols-outlined {
     color: white;
 }
-
-
-
-
-
 .cart-icon {
     font-size: 24px;
     cursor: pointer;
@@ -163,4 +158,10 @@ footer {
     font-size: 16px;
     text-align: center;
     margin: 20px 0; /* Add margin for spacing */
+}
+.search-bar{
+    position: relative;
+}
+.search-bar a{
+    padding: 0;
 }
