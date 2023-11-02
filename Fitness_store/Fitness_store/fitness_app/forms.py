@@ -45,4 +45,4 @@ class CustomPasswordResetForm(PasswordResetForm):
 
 
 class ProductSearchForm(forms.Form):
-    search_query = forms.CharField(max_length=100, label='Search Product')
+    search_query = forms.CharField(max_length=100, label='')

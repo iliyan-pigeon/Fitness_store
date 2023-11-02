@@ -184,4 +184,17 @@ footer {
     z-index: 2;
     border: 1px solid #ddd;
     border-radius: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.search-dropdown.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+.search-heading{
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }

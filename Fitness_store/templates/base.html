@@ -22,8 +22,9 @@
         <div id="search-dropdown" class="search-dropdown">
             <form method="post">
                 {% csrf_token %}
+                <p class="search-heading">Search Product</p>
                 {{ search_form.as_p }}
-                <button type="submit">Search</button>
+                <button class="my-button" type="submit">Search</button>
             </form>
         </div>
         </div>
