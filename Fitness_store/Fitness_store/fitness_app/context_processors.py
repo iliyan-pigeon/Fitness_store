@@ -1,3 +1,4 @@
+from .forms import ProductSearchForm
 from .models import Cart, GymEquipment, Supplements
 
 
@@ -31,4 +32,6 @@ def cart_context(request):
         cart_items = cart_data
         cart_total = sum(item.price * item.quantity for item in cart_items)
 
-    return {'cart_items': cart_items, 'cart_total': cart_total}
+    search_form = ProductSearchForm
+
+    return {'cart_items': cart_items, 'cart_total': cart_total, 'search_form': search_form}

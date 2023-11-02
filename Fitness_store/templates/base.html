@@ -19,6 +19,13 @@
         <span class="material-symbols-outlined search-bar">
             <a href="#" onclick="toggleSearchBar()">search</a>
         </span>
+        <div id="search-dropdown" class="search-dropdown">
+            <form method="post">
+                {% csrf_token %}
+                {{ search_form.as_p }}
+                <button type="submit">Search</button>
+            </form>
+        </div>
         </div>
         <div class="cart-container">
         <span class="material-symbols-outlined cart-icon">
@@ -92,7 +99,7 @@
         }
     }
         function toggleSearchBar() {
-        let searchBar = document.getElementById("cart-dropdown");
+        let searchBar = document.getElementById("search-dropdown");
         if (searchBar.style.display === "block") {
             searchBar.style.display = "none";
         } else {

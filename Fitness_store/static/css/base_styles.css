@@ -71,7 +71,7 @@ footer {
     color: #333;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: none;
-    z-index: 2; /* Ensure the cart appears above other elements */
+    z-index: 2;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -104,7 +104,6 @@ footer {
     color: #333;
     font-weight: bold;
 }
-
 .cart-total {
     padding: 10px;
     text-align: center;
@@ -113,15 +112,12 @@ footer {
     border-top: 1px solid #ddd;
     font-weight: bold;
 }
-
 .cart-item-empty {
     text-align: center;
     padding: 10px;
     color: #333;
     font-weight: bold;
 }
-
-/* Dropdown Cart Animation */
 .cart-dropdown.show {
     display: block;
     animation: fadeIn 0.3s ease-in-out;
@@ -151,13 +147,13 @@ footer {
 
 }
 .error-message {
-    background-color: #f44336; /* Red background color */
-    color: white; /* White text color */
-    padding: 10px; /* Add some padding to the message */
-    border-radius: 5px; /* Add rounded corners */
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
     font-size: 16px;
     text-align: center;
-    margin: 20px 0; /* Add margin for spacing */
+    margin: 20px 0;
 }
 .search-bar{
     position: relative;
@@ -175,4 +171,17 @@ footer {
     position: relative;
     align-items: center;
     width: 100px;
+}
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 2;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
