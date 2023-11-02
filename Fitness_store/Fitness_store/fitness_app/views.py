@@ -216,18 +216,13 @@ def complete_order(request):
     return redirect('homepage')
 
 
-def search_products(request):
-    if request.method == 'GET':
-        form = ProductSearchForm(request.GET)
-        if form.is_valid():
-            search_query = form.cleaned_data['search_query']
-            supplements = Supplements.objects.filter(name__icontains=search_query)
-            gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
-            # You can also return these results to your template
-            return render(request, {'supplements': supplements, 'gym_equipment': gym_equipment})
-    else:
-        form = ProductSearchForm()
-    return render(request, 'search.html', {'form': form})
+def search_product(request):
+    form = ProductSearchForm(request.GET)
+    if form.is_valid():
+        search_query = form.cleaned_data['search_query']
+        supplements = Supplements.objects.filter(name__icontains=search_query)
+        gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
+        return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
 
 
 #def purchase(request):

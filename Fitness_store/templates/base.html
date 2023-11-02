@@ -20,7 +20,7 @@
             <a href="#" onclick="toggleSearchBar()">search</a>
         </span>
         <div id="search-dropdown" class="search-dropdown">
-            <form method="post">
+            <form action="{% url 'search product' %}" method="get">
                 {% csrf_token %}
                 <p class="search-heading">Search Product</p>
                 {{ search_form.as_p }}

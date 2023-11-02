@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% for supplement in supplements %}
+        <p>{{ supplement.name }}</p>
+    {% endfor %}
+    {% for equipment in gym_equipment %}
+        <p>{{ equipment.name }}</p>
+    {% endfor %}
+
+{% endblock %}
