@@ -165,3 +165,14 @@ footer {
 .search-bar a{
     padding: 0;
 }
+.search-bar-container span{
+    border: 2px solid white;
+    padding: 0.5rem;
+}
+.tools-container{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    width: 100px;
+}
