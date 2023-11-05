@@ -16,8 +16,8 @@
     <p>Last name: {{ request.user.last_name }}</p>
     <p>Gender: {{ request.user.gender }}</p>
     <div class="profile-buttons">
-        <a href="{% url 'profile edit' request.user.pk %}" class="btn btn-primary">Edit Profile</a>
-        <a href="{% url 'profile delete' request.user.pk %}" class="btn btn-danger">Delete Profile</a>
+        <a href="{% url 'profile edit' request.user.pk %}" class="btn my-button btn-primary">Edit Profile</a>
+        <a href="{% url 'profile delete' request.user.pk %}" class="btn my-button btn-danger">Delete Profile</a>
     </div>
     </div>
 </div>
