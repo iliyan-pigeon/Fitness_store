@@ -8,48 +8,54 @@
             {% for equipment in object_list %}
                 {% if equipment.id == 1 or equipment.id == 4 or equipment.id == 7 %}
                     <div class="block">
-                        <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
+                        <div class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
                             {% if equipment.amount_in_stock > 0 %}
-                            <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
-                            {% csrf_token %}
-                                <button class="my-button">Add to cart</button>
-                            </form>
+                            <a href="{% url 'add to cart' 'gym_equipment' equipment.id %}" class="my-button">
+                                Add to cart
+                            </a>
                             {% else %}
                                 <button class="my-button out-of-stock">Out of stock</button>
                             {% endif %}
-                        </a>
+                            <a href="{% url 'equipment product' equipment.pk %}" class="my-button">
+                                View
+                            </a>
+                        </div>
                 {% elif equipment.id == 3 or equipment.id == 6 or equipment.id == 9 %}
-                        <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
+                        <div class="products-item">
                             <img src="{{ equipment.photo.url }}" alt="Service 1">
                             <h3>{{ equipment.name }}</h3>
                             <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
                             {% if equipment.amount_in_stock > 0 %}
-                            <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
-                            {% csrf_token %}
-                                <button class="my-button">Add to cart</button>
-                            </form>
+                            <a href="{% url 'add to cart' 'gym_equipment' equipment.id %}" class="my-button">
+                                Add to cart
+                            </a>
                             {% else %}
                                 <button class="my-button out-of-stock">Out of stock</button>
                             {% endif %}
-                        </a>
+                            <a href="{% url 'equipment product' equipment.pk %}" class="my-button">
+                                View
+                            </a>
+                        </div>
                     </div>
                 {% else %}
-                    <a href="{% url 'equipment product' equipment.pk %}" class="products-item">
-                        <img src="{{ equipment.photo.url }}" alt="Service 1">
-                        <h3>{{ equipment.name }}</h3>
-                        <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
-                        {% if equipment.amount_in_stock > 0 %}
-                        <form action="{% url 'add to cart' 'gym_equipment' equipment.id %}" method="post">
-                        {% csrf_token %}
-                            <button class="my-button">Add to cart</button>
-                        </form>
-                        {% else %}
-                            <button class="my-button out-of-stock">Out of stock</button>
-                        {% endif %}
-                    </a>
+                        <div class="products-item">
+                            <img src="{{ equipment.photo.url }}" alt="Service 1">
+                            <h3>{{ equipment.name }}</h3>
+                            <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
+                            {% if equipment.amount_in_stock > 0 %}
+                            <a href="{% url 'add to cart' 'gym_equipment' equipment.id %}" class="my-button">
+                                Add to cart
+                            </a>
+                            {% else %}
+                                <button class="my-button out-of-stock">Out of stock</button>
+                            {% endif %}
+                            <a href="{% url 'equipment product' equipment.pk %}" class="my-button">
+                                View
+                            </a>
+                        </div>
                 {% endif %}
             {% endfor %}
         </div>
