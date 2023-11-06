@@ -8,7 +8,7 @@
             {% for supplement in object_list %}
                 {% if supplement.id == 1 or supplement.id == 4 or supplement.id == 7 %}
                     <div class="block">
-                    <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
+                    <div class="products-item">
                         <img src="{{ supplement.photo.url }}" alt="Service 1">
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">
@@ -16,16 +16,18 @@
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
                         {% if supplement.amount_in_stock > 0 %}
-                        <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                        {% csrf_token %}
-                            <button class="my-button">Add to cart</button>
-                        </form>
+                        <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
+                            Add to cart
+                        </a>
                         {% else %}
                         <button class="my-button out-of-stock">Out of stock</button>
                         {% endif %}
-                    </a>
+                        <a href="{% url 'supplement product' supplement.pk %}" class="my-button">
+                            View
+                        </a>
+                    </div>
                 {% elif supplement.id == 3 or supplement.id == 6 or supplement.id == 9 %}
-                        <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
+                        <div class="products-item">
                             <img src="{{ supplement.photo.url }}" alt="Service 1">
                             <h3>{{ supplement.name }}</h3>
                             <div class="product-container">
@@ -33,17 +35,19 @@
                             <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                             </div>
                             {% if supplement.amount_in_stock > 0 %}
-                            <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                            {% csrf_token %}
-                                <button class="my-button">Add to cart</button>
-                            </form>
+                            <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
+                                Add to cart
+                            </a>
                             {% else %}
                             <button class="my-button out-of-stock">Out of stock</button>
                             {% endif %}
-                        </a>
+                            <a href="{% url 'supplement product' supplement.pk %}" class="my-button">
+                                View
+                            </a>
+                        </div>
                         </div>
                 {% else %}
-                    <a href="{% url 'supplement product' supplement.pk %}" class="products-item">
+                    <div class="products-item">
                         <img src="{{ supplement.photo.url }}" alt="Service 1">
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">
@@ -51,14 +55,16 @@
                         <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
                         </div>
                         {% if supplement.amount_in_stock > 0 %}
-                        <form action="{% url 'add to cart' 'supplement' supplement.id %}" method="post">
-                        {% csrf_token %}
-                            <button class="my-button">Add to cart</button>
-                        </form>
+                        <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
+                            Add to cart
+                        </a>
                         {% else %}
                         <button class="my-button out-of-stock">Out of stock</button>
                         {% endif %}
-                    </a>
+                        <a href="{% url 'supplement product' supplement.pk %}" class="my-button">
+                            View
+                        </a>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div>
