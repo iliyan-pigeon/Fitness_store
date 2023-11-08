@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2 class="edit-profile-header">Edit Profile</h2>
 <div class="profile-container">
-    <h2>Edit Profile</h2>
     <form method="POST" action="{% url 'profile edit' request.user.pk %}">
         {% csrf_token %}
         <div class="profile-item">
