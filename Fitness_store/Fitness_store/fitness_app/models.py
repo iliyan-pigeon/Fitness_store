@@ -181,7 +181,7 @@ class CartItem(models.Model):
 
 class ShippingAddress(models.Model):
     user = models.ForeignKey(FitnessUser, on_delete=models.SET_NULL, blank=True, null=True)
-    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, blank=True, null=True)
+    cart = models.CharField(max_length=2000, null=True)
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     region = models.CharField(max_length=200, null=True)
