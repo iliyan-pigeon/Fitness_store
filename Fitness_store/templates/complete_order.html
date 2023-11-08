@@ -2,5 +2,26 @@
 {% block content %}
 {% load static %}
     {% csrf_token %}
-    {{ form.as_p }}
+    <form method="POST" action="{% url 'complete order' %}">
+        {% csrf_token %}
+        <div class="profile-item">
+            <label for="address">Address:</label>
+            {{ form.address }}
+        </div>
+        <div class="profile-item">
+            <label for="city">City:</label>
+            {{ form.city }}
+        </div>
+        <div class="profile-item">
+            <label for="region">Region:</label>
+            {{ form.region }}
+        </div>
+        <div class="profile-item">
+            <label for="zipcode">Zipcode:</label>
+            {{ form.zipcode }}
+        </div>
+        <div class="profile-buttons">
+            <button type="submit" class="btn my-button btn-secondary">Save changes</button>
+        </div>
+    </form>
 {% endblock %}
