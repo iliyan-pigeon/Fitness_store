@@ -52,5 +52,4 @@ class ShippingAddressForm(forms.ModelForm):
 
     class Meta:
         model = ShippingAddress
-        fields = "__all__"
-        
+        fields = ['address', 'city', 'region', 'zipcode']
