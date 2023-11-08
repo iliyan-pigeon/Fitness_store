@@ -3,7 +3,7 @@ from django.contrib.auth import forms as auth_forms, get_user_model
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 
-from Fitness_store.fitness_app.models import FitnessUser
+from Fitness_store.fitness_app.models import FitnessUser, ShippingAddress
 
 UserModel = get_user_model()
 
@@ -46,3 +46,11 @@ class CustomPasswordResetForm(PasswordResetForm):
 
 class ProductSearchForm(forms.Form):
     search_query = forms.CharField(max_length=100, label='')
+
+
+class ShippingAddressForm(forms.ModelForm):
+
+    class Meta:
+        model = ShippingAddress
+        fields = "__all__"
+        
