@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, \
-    FitnessUser, Cart, CartItem
+    FitnessUser, Cart, CartItem, ShippingAddress
 
 
 @admin.register(Supplements)
@@ -27,4 +27,9 @@ class Cart(admin.ModelAdmin):
 
 @admin.register(CartItem)
 class CartItem(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ShippingAddress)
+class ShippingAddress(admin.ModelAdmin):
     pass
