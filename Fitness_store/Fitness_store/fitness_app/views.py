@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    CustomPasswordResetForm, ProductSearchForm
+    CustomPasswordResetForm, ProductSearchForm, ShippingAddressForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
@@ -194,7 +194,24 @@ class CustomPasswordResetView(PasswordResetView):
     success_url = reverse_lazy('password reset done')
 
 
-def complete_order(request):
+class CompleteOrderView(views.FormView):
+    template_name = 'complete_order.html'  # Create a template for displaying the form
+    form_class = ShippingAddressForm
+
+    def get_success_url(self):
+        return "homepage"
+
+
+def search_product(request):
+    form = ProductSearchForm(request.GET)
+    if form.is_valid():
+        search_query = form.cleaned_data['search_query']
+        supplements = Supplements.objects.filter(name__icontains=search_query)
+        gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
+        return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
+
+
+def purchase(request):
     cart = None
     if request.user.is_authenticated:
         cart = Cart.objects.get(user=request.user)
@@ -214,34 +231,3 @@ def complete_order(request):
     cart.delete()
 
     return redirect('homepage')
-
-
-def search_product(request):
-    form = ProductSearchForm(request.GET)
-    if form.is_valid():
-        search_query = form.cleaned_data['search_query']
-        supplements = Supplements.objects.filter(name__icontains=search_query)
-        gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
-        return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
-
-
-#def purchase(request):
-#    cart = None
-#    if request.user.is_authenticated:
-#        cart = Cart.objects.get(user=request.user)
-#    else:
-#        cart = Cart.objects.get(id=request.session['cart_id'])
-#
-#    for i in CartItem.objects.filter(cart_id=cart.id):
-#        product = None
-#        if i.product_type == "supplement":
-#            product = Supplements.objects.get(id=i.product_id)
-#        elif i.product_type == "gym_equipment":
-#            product = GymEquipment.objects.get(id=i.product_id)
-#
-#        product.amount_in_stock -= i.quantity
-#        product.save()
-#
-#    cart.delete()
-#
-#    return redirect('homepage')
