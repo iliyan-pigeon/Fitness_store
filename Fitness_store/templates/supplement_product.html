@@ -9,7 +9,7 @@
     <p>{{ object.description }}</p>
     <div class="product-container">
         <p>Amount: {{ object.amount }} {{ object.amount_type }}</p>
-        <p>Price: {{ object.price|floatformat:2 }} lv.</p>
+        <p>Price: ${{ object.price|floatformat:2 }}</p>
     </div>
     {% if object.amount_in_stock > 0 %}
     <form action="{% url 'add to cart' 'supplement' object.id %}" method="post">

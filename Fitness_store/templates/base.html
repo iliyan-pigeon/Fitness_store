@@ -39,7 +39,7 @@
                         <li class="cart-item">
                             <span class="cart-item-title">{{ item.name }}</span>
                             <div class="cart-item-details">
-                                <span class="cart-item-price">Price: {{ item.price }}</span>
+                                <span class="cart-item-price">Price: ${{ item.price }}</span>
                                 {% if item.product_type == "supplement" %}
                                     <span class="cart-item-quantity">Amount: <a href="{% url 'remove from cart' "supplement" item.product_id %}" class="plus-minus">-</a>{{ item.quantity }}<a href="{% url 'add to cart' "supplement" item.product_id %}" class="plus-minus">+</a></span>
                                 {% else %}

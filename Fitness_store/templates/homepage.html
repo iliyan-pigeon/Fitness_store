@@ -18,7 +18,7 @@
                 <div class="products-item">
                     <img src="{{ supplement.photo.url }}" alt="Service 1">
                     <h3>{{ supplement.name }}</h3>
-                    <div class="product-container"><p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p><p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                    <div class="product-container"><p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p><p>Price: ${{ supplement.price|floatformat:2 }}</p>
                     </div>
                     {% if supplement.amount_in_stock > 0 %}
                     <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
@@ -42,7 +42,7 @@
                 <div class="products-item">
                     <img src="{{ equipment.photo.url }}" alt="Service 1">
                     <h3>{{ equipment.name }}</h3>
-                    <p>Price: {{ equipment.price|floatformat:2 }} lv.</p>
+                    <p>Price: ${{ equipment.price|floatformat:2 }}</p>
                     {% if equipment.amount_in_stock > 0 %}
                     <a href="{% url 'add to cart' 'gym_equipment' equipment.id %}" class="my-button">
                         Add to cart

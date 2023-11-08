@@ -13,7 +13,7 @@
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
-                        <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                        <p>Price: ${{ supplement.price|floatformat:2 }}</p>
                         </div>
                         {% if supplement.amount_in_stock > 0 %}
                         <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
@@ -32,7 +32,7 @@
                             <h3>{{ supplement.name }}</h3>
                             <div class="product-container">
                             <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
-                            <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                            <p>Price: ${{ supplement.price|floatformat:2 }}</p>
                             </div>
                             {% if supplement.amount_in_stock > 0 %}
                             <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
@@ -52,7 +52,7 @@
                         <h3>{{ supplement.name }}</h3>
                         <div class="product-container">
                         <p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p>
-                        <p>Price: {{ supplement.price|floatformat:2 }} lv.</p>
+                        <p>Price: ${{ supplement.price|floatformat:2 }}</p>
                         </div>
                         {% if supplement.amount_in_stock > 0 %}
                         <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
