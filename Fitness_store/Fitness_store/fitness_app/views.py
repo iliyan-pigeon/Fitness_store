@@ -194,12 +194,41 @@ class CustomPasswordResetView(PasswordResetView):
     success_url = reverse_lazy('password reset done')
 
 
-class CompleteOrderView(views.FormView):
-    template_name = 'complete_order.html'  # Create a template for displaying the form
-    form_class = ShippingAddressForm
+def complete_order(request):
+    if request.method == 'POST':
+        form = ShippingAddressForm(request.POST)
+        if form.is_valid():
+            shipping_details = form.save(commit=False)
+            cart = None
+            if request.user.is_authenticated:
+                cart = Cart.objects.get(user=request.user)
+                shipping_details.user = request.user
+                products_for_delivery = ''
+            else:
+                cart = Cart.objects.get(id=request.session['cart_id'])
+                shipping_details.user = 'Guest user'
+                products_for_delivery = ''
 
-    def get_success_url(self):
-        return "homepage"
+            for i in CartItem.objects.filter(cart_id=cart.id):
+                product = None
+                if i.product_type == "supplement":
+                    product = Supplements.objects.get(id=i.product_id)
+                elif i.product_type == "gym_equipment":
+                    product = GymEquipment.objects.get(id=i.product_id)
+                products_for_delivery += f"{i.name}: {i.quantity}/n"
+
+                product.amount_in_stock -= i.quantity
+                product.save()
+
+            shipping_details.cart = ", ".join(products_for_delivery)
+            shipping_details.save()
+            cart.delete()
+            return redirect('homepage')  # Redirect to the next step in the checkout process
+
+    else:
+        form = ShippingAddressForm()
+
+    return render(request, 'complete_order.html', {'form': form})
 
 
 def search_product(request):
@@ -211,23 +240,23 @@ def search_product(request):
         return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
 
 
-def purchase(request):
-    cart = None
-    if request.user.is_authenticated:
-        cart = Cart.objects.get(user=request.user)
-    else:
-        cart = Cart.objects.get(id=request.session['cart_id'])
-
-    for i in CartItem.objects.filter(cart_id=cart.id):
-        product = None
-        if i.product_type == "supplement":
-            product = Supplements.objects.get(id=i.product_id)
-        elif i.product_type == "gym_equipment":
-            product = GymEquipment.objects.get(id=i.product_id)
-
-        product.amount_in_stock -= i.quantity
-        product.save()
-
-    cart.delete()
-
-    return redirect('homepage')
+#def purchase(request):
+#    cart = None
+#    if request.user.is_authenticated:
+#        cart = Cart.objects.get(user=request.user)
+#    else:
+#        cart = Cart.objects.get(id=request.session['cart_id'])
+#
+#    for i in CartItem.objects.filter(cart_id=cart.id):
+#        product = None
+#        if i.product_type == "supplement":
+#            product = Supplements.objects.get(id=i.product_id)
+#        elif i.product_type == "gym_equipment":
+#            product = GymEquipment.objects.get(id=i.product_id)
+#
+#        product.amount_in_stock -= i.quantity
+#        product.save()
+#
+#    cart.delete()
+#
+#    return redirect('homepage')
