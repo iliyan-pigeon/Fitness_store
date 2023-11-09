@@ -1,6 +1,7 @@
 from django.core import validators
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.utils import timezone
 
 
 def validate_only_alphabetical(value):
@@ -175,6 +176,7 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
+    date_added = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return f"{self.quantity} x {self.name}"
@@ -187,7 +189,7 @@ class ShippingAddress(models.Model):
     city = models.CharField(max_length=200, null=True)
     region = models.CharField(max_length=200, null=True)
     zipcode = models.CharField(max_length=200, null=True)
-    date_added = models.CharField(max_length=200, null=True)
+    date_added = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return self.address
