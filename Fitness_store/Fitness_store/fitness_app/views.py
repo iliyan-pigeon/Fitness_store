@@ -206,7 +206,7 @@ def complete_order(request):
                 products_for_delivery = ''
             else:
                 cart = Cart.objects.get(id=request.session['cart_id'])
-                shipping_details.user = 'Guest user'
+                shipping_details.user = request.user  # It's not working properly. Will be fixed.
                 products_for_delivery = ''
 
             for i in CartItem.objects.filter(cart_id=cart.id):
