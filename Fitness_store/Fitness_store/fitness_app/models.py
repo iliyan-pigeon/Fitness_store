@@ -155,6 +155,7 @@ class FitnessUser(auth_models.AbstractUser):
 class Cart(models.Model):
     user = models.ForeignKey(FitnessUser, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    in_progress = models.BooleanField(default=False)
 
     def __str__(self):
         if self.user:
