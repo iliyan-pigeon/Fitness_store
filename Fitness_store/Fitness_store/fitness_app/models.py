@@ -176,7 +176,8 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
-    date_added = models.DateTimeField(default=timezone.now, editable=False)
+    date_added = models.DateTimeField(default=timezone.now)
+    in_progress = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.quantity} x {self.name}"
@@ -189,7 +190,7 @@ class ShippingAddress(models.Model):
     city = models.CharField(max_length=200, null=True)
     region = models.CharField(max_length=200, null=True)
     zipcode = models.CharField(max_length=200, null=True)
-    date_added = models.DateTimeField(default=timezone.now, editable=False)
+    date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.address
