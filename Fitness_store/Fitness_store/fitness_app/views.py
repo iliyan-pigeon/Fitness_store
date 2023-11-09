@@ -6,6 +6,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
@@ -203,11 +204,11 @@ def complete_order(request):
             if request.user.is_authenticated:
                 cart = Cart.objects.get(user=request.user)
                 shipping_details.user = request.user
-                products_for_delivery = ''
+                shipping_details.cart = cart
             else:
                 cart = Cart.objects.get(id=request.session['cart_id'])
                 shipping_details.user = request.user  # It's not working properly. Will be fixed.
-                products_for_delivery = ''
+                shipping_details.cart = cart
 
             for i in CartItem.objects.filter(cart_id=cart.id):
                 product = None
@@ -215,15 +216,17 @@ def complete_order(request):
                     product = Supplements.objects.get(id=i.product_id)
                 elif i.product_type == "gym_equipment":
                     product = GymEquipment.objects.get(id=i.product_id)
-                products_for_delivery += f"{i.name}: {i.quantity}/n"
 
                 product.amount_in_stock -= i.quantity
                 product.save()
+                i.in_progress = True
+                i.date_added = timezone.now()
+                i.save()
 
-            shipping_details.cart = ", ".join(products_for_delivery)
             shipping_details.save()
-            cart.delete()
-            return redirect('homepage')  # Redirect to the next step in the checkout process
+            cart.in_progress = True
+            cart.save()
+            return redirect('homepage')
 
     else:
         form = ShippingAddressForm()
