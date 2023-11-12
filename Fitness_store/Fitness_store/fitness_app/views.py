@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
     CustomPasswordResetForm, ProductSearchForm, ShippingAddressForm
-from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser
+from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, ShippingAddress
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
 UserModel = get_user_model()
@@ -241,4 +241,10 @@ def search_product(request):
         supplements = Supplements.objects.filter(name__icontains=search_query)
         gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
         return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
+
+
+def orders_for_delivery(request):
+    orders = ShippingAddress.objects.all()
+
+    return render(request, 'orders_for_delivery.html', {'orders': orders})
 
