@@ -2,6 +2,8 @@
 {% block content %}
 {% load static %}
 
-
+    {% for order in orders %}
+        <p>{{ order }}</p>
+    {% endfor %}
 
 {% endblock %}
