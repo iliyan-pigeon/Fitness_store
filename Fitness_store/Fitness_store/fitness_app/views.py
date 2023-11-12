@@ -242,24 +242,3 @@ def search_product(request):
         gym_equipment = GymEquipment.objects.filter(name__icontains=search_query)
         return render(request, 'search_results.html', {'supplements': supplements, 'gym_equipment': gym_equipment})
 
-
-#def purchase(request):
-#    cart = None
-#    if request.user.is_authenticated:
-#        cart = Cart.objects.get(user=request.user)
-#    else:
-#        cart = Cart.objects.get(id=request.session['cart_id'])
-#
-#    for i in CartItem.objects.filter(cart_id=cart.id):
-#        product = None
-#        if i.product_type == "supplement":
-#            product = Supplements.objects.get(id=i.product_id)
-#        elif i.product_type == "gym_equipment":
-#            product = GymEquipment.objects.get(id=i.product_id)
-#
-#        product.amount_in_stock -= i.quantity
-#        product.save()
-#
-#    cart.delete()
-#
-#    return redirect('homepage')
