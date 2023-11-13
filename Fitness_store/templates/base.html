@@ -14,6 +14,13 @@
     <header>
         <div class="header-container">
         <h1><a href="{% url 'homepage' %}">Pure Strength</a></h1>
+        {% if request.user.is_staff %}
+            <div class="shipping-container">
+            <span class="material-symbols-outlined">
+                local_shipping
+            </span>
+            </div>
+        {% endif %}
         <div class="tools-container">
         <div class="search-bar-container">
         <span class="material-symbols-outlined search-bar">
