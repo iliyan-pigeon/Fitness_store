@@ -248,3 +248,9 @@ def orders_for_delivery(request):
 
     return render(request, 'orders_for_delivery.html', {'orders': orders})
 
+
+def order_details(request, pk):
+    order = ShippingAddress.objects.get(pk=pk)
+
+    return render(request, 'order_details.html', {'order': order})
+
