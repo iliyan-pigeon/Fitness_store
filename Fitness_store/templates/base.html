@@ -71,6 +71,9 @@
         <a href="{% url 'supplements' %}">Supplements</a>
         <a href="{% url 'gym equipment' %}">Gym equipment</a>
         <a href="{% url 'contacts' %}">Contact</a>
+        {% if request.user.is_staff %}
+            <a href="{% url 'orders for delivery' %}">Orders for delivery</a>
+        {% endif %}
         </div>
         <div>
         {% if request.user.is_authenticated %}
