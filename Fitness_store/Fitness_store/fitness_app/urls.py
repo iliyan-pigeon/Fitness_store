@@ -5,7 +5,7 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, CustomPasswordResetView, \
-    search_product, complete_order, orders_for_delivery
+    search_product, complete_order, orders_for_delivery, order_details
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -35,4 +35,5 @@ urlpatterns = [
     path('complete_order/', complete_order, name='complete order'),
     path('search_product/', search_product, name='search product'),
     path('orders_for_delivery/', orders_for_delivery, name='orders for delivery'),
+    path('order_datails/<int:pk>/', order_details, name='order details'),
 ]
