@@ -1,5 +1,5 @@
 from .forms import ProductSearchForm
-from .models import Cart, GymEquipment, Supplements
+from .models import Cart, GymEquipment, Supplements, FitnessUser
 
 
 def get_product_price(product_type, product_id):
