@@ -1,0 +1,15 @@
+.single-order{
+    color: #fff;
+    border: 2px solid white;
+    width: 50rem;
+    text-align: center;
+    padding: 1rem;
+}
+.orders-container{
+    min-height: 489px;
+}
+.orders-heading{
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+}

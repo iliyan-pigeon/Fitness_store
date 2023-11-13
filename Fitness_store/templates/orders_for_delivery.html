@@ -2,8 +2,16 @@
 {% block content %}
 {% load static %}
 
+    {% if orders %}
+    <h2 class="orders-heading">Orders</h2>
+
+    <div class="orders-container">
     {% for order in orders %}
-        <p>{{ order }}</p>
+        <a href="{% url 'order details' order.pk %}" class="single-order">{{ order.address }}: {{ order.date_added }}</a>
     {% endfor %}
+    {% else %}
+        <h2 class="orders-heading">No orders</h2>
+    {% endif %}
+    </div>
 
 {% endblock %}
