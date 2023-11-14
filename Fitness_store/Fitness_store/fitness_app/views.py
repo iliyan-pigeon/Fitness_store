@@ -208,6 +208,8 @@ def complete_order(request):
                 cart = Cart.get_cart_for_user_or_session(request.session.session_key)
                 shipping_details.session_key = request.session.session_key
 
+            order = get_or_create_order(request)
+
             for i in CartItem.objects.filter(cart_id=cart.id):
                 product = None
                 if i.product_type == "supplement":
@@ -218,9 +220,18 @@ def complete_order(request):
                 product.amount_in_stock -= i.quantity
                 product.save()
 
-            shipping_details.save()
-            cart.in_progress = True
+                order_item, created = OrderItem.objects.get_or_create(
+                    order=order,
+                    name=product.name,
+                    price=product.price,
+                    quantity=i.quantity,
+                    product_id=product.id,
+                    product_type=i.product_type,
+                )
+                order_item.save()
+            cart.delete()
             cart.save()
+
             return redirect('homepage')
 
     else:
