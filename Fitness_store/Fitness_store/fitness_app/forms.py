@@ -48,8 +48,8 @@ class ProductSearchForm(forms.Form):
     search_query = forms.CharField(max_length=100, label='')
 
 
-#class ShippingAddressForm(forms.ModelForm):
-#
-#    class Meta:
-#        model = ShippingAddress
-#        fields = ['address', 'city', 'region', 'zipcode']
+class OrderAddressForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        fields = ['address', 'city', 'region', 'zipcode', 'status']
