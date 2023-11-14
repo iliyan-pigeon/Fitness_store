@@ -201,14 +201,22 @@ def complete_order(request):
         if form.is_valid():
             shipping_details = form.save(commit=False)
             cart = None
+            order = get_or_create_order(request)
             if request.user.is_authenticated:
                 cart = Cart.objects.get(user=request.user)
                 shipping_details.user = request.user
+                order.user = shipping_details.user
             else:
                 cart = Cart.get_cart_for_user_or_session(request.session.session_key)
                 shipping_details.session_key = request.session.session_key
+                order.session_key = shipping_details.session_key
 
-            order = get_or_create_order(request)
+            order.address = shipping_details.address
+            order.city = shipping_details.city
+            order.region = shipping_details.region
+            order.zipcode = shipping_details.zipcode
+            order.date_added = shipping_details.date_added
+            order.save()
 
             for i in CartItem.objects.filter(cart_id=cart.id):
                 product = None
@@ -230,7 +238,6 @@ def complete_order(request):
                 )
                 order_item.save()
             cart.delete()
-            cart.save()
 
             return redirect('homepage')
 
