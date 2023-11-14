@@ -209,7 +209,7 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
 
     def __str__(self):
-        return self.address
+        return f"{self.address}"
 
 
 class OrderItem(models.Model):
@@ -226,4 +226,4 @@ class OrderItem(models.Model):
     product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
 
     def __str__(self):
-        return f"{self.quantity} x {self.name} in Order #{self.order.pk}"
+        return f"{self.quantity} x {self.name} in Order #{self.order}"
