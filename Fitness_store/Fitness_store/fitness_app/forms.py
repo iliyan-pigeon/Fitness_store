@@ -52,4 +52,4 @@ class OrderAddressForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['address', 'city', 'region', 'zipcode', 'status']
+        fields = ['address', 'city', 'region', 'zipcode']
