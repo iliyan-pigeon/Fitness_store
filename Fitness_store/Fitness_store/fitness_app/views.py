@@ -10,9 +10,9 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    CustomPasswordResetForm, ProductSearchForm
+    CustomPasswordResetForm, ProductSearchForm, OrderAddressForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
-from Fitness_store.fitness_app.utils import get_or_create_cart
+from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 
 UserModel = get_user_model()
 
@@ -197,18 +197,16 @@ class CustomPasswordResetView(PasswordResetView):
 
 def complete_order(request):
     if request.method == 'POST':
-        form = ShippingAddressForm(request.POST)
+        form = OrderAddressForm(request.POST)
         if form.is_valid():
             shipping_details = form.save(commit=False)
             cart = None
             if request.user.is_authenticated:
                 cart = Cart.objects.get(user=request.user)
                 shipping_details.user = request.user
-                shipping_details.cart = cart
             else:
                 cart = Cart.get_cart_for_user_or_session(request.session.session_key)
-                shipping_details.user = None
-                shipping_details.cart = cart
+                shipping_details.session_key = request.session.session_key
 
             for i in CartItem.objects.filter(cart_id=cart.id):
                 product = None
@@ -219,9 +217,6 @@ def complete_order(request):
 
                 product.amount_in_stock -= i.quantity
                 product.save()
-                i.in_progress = True
-                i.date_added = timezone.now()
-                i.save()
 
             shipping_details.save()
             cart.in_progress = True
@@ -229,7 +224,7 @@ def complete_order(request):
             return redirect('homepage')
 
     else:
-        form = ShippingAddressForm()
+        form = OrderAddressForm()
 
     return render(request, 'complete_order.html', {'form': form})
 
@@ -244,13 +239,13 @@ def search_product(request):
 
 
 def orders_for_delivery(request):
-    orders = ShippingAddress.objects.all()
+    orders = Order.objects.all()
 
     return render(request, 'orders_for_delivery.html', {'orders': orders})
 
 
 def order_details(request, pk):
-    order = ShippingAddress.objects.get(pk=pk)
+    order = Order.objects.get(pk=pk)
 
     return render(request, 'order_details.html', {'order': order})
 
