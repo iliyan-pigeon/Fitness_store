@@ -10,8 +10,8 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    CustomPasswordResetForm, ProductSearchForm, ShippingAddressForm
-from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, ShippingAddress
+    CustomPasswordResetForm, ProductSearchForm
+from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart
 
 UserModel = get_user_model()
@@ -206,8 +206,8 @@ def complete_order(request):
                 shipping_details.user = request.user
                 shipping_details.cart = cart
             else:
-                cart = Cart.objects.get(id=request.session['cart_id'])
-                shipping_details.user = request.user  # It's not working properly. Will be fixed.
+                cart = Cart.get_cart_for_user_or_session(request.session.session_key)
+                shipping_details.user = None
                 shipping_details.cart = cart
 
             for i in CartItem.objects.filter(cart_id=cart.id):

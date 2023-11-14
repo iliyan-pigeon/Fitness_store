@@ -156,12 +156,19 @@ class FitnessUser(auth_models.AbstractUser):
 class Cart(models.Model):
     user = models.ForeignKey(FitnessUser, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    in_progress = models.BooleanField(default=False)
+    session_key = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         if self.user:
             return f"Cart for {self.user.username}"
         return "Guest Cart"
+
+    def get_cart_for_user_or_session(self, user=None, session_key=None):
+        if user:
+            return self.objects.get_or_create(user=user)[0]
+        elif session_key:
+            return self.objects.get_or_create(session_key=session_key)[0]
+        return None
 
 
 class CartItem(models.Model):
@@ -176,21 +183,47 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
     product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
-    date_added = models.DateTimeField(default=timezone.now)
-    in_progress = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.quantity} x {self.name}"
 
 
-class ShippingAddress(models.Model):
+class Order(models.Model):
+    PENDING = 'Pending'
+    DELIVERED = 'Delivered'
+    CANCELLED = 'Cancelled'
+
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (DELIVERED, 'Delivered'),
+        (CANCELLED, 'Cancelled'),
+    ]
+
     user = models.ForeignKey(FitnessUser, on_delete=models.SET_NULL, blank=True, null=True)
-    cart = models.CharField(max_length=2000, null=True)
+    session_key = models.CharField(max_length=50, null=True, blank=True)
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     region = models.CharField(max_length=200, null=True)
     zipcode = models.CharField(max_length=200, null=True)
     date_added = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
 
     def __str__(self):
         return self.address
+
+
+class OrderItem(models.Model):
+    MAX_LENGTH_NAME = 30
+    MAX_DIGITS_PRICE = 10
+    DECIMAL_PLACES = 2
+    DEFAULT_QUANTITY = 1
+
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    name = models.CharField(max_length=MAX_LENGTH_NAME)
+    price = models.DecimalField(max_digits=MAX_DIGITS_PRICE, decimal_places=DECIMAL_PLACES)
+    quantity = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
+    product_id = models.PositiveIntegerField(default=DEFAULT_QUANTITY)
+    product_type = models.CharField(max_length=MAX_LENGTH_NAME, default='')
+
+    def __str__(self):
+        return f"{self.quantity} x {self.name} in Order #{self.order.pk}"
