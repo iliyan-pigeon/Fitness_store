@@ -30,7 +30,7 @@ def cart_context(request):
     elif 'cart_id' in request.session:
         cart_data = Cart.objects.get(id=request.session.get('cart_id')).cartitem_set.all()
         cart_items = cart_data
-        cart_total = sum(item.price * item.quantity for item in cart_items if item.in_progress is False)
+        cart_total = sum(item.price * item.quantity for item in cart_items)
 
     search_form = ProductSearchForm
 
