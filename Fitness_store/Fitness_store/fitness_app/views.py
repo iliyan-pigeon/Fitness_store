@@ -207,8 +207,12 @@ def complete_order(request):
                 shipping_details.user = request.user
                 order.user = shipping_details.user
             else:
-                cart = Cart.objects.get(session_key=request.session.session_key)
+                cart = get_or_create_cart(request)
+                print(cart)
                 shipping_details.session_key = request.session.session_key
+                cart.session_key = shipping_details.session_key
+                print(cart.session_key)
+                cart.save()
                 order.session_key = shipping_details.session_key
 
             order.address = shipping_details.address
@@ -238,12 +242,16 @@ def complete_order(request):
                     product_type=i.product_type,
                 )
                 order_item.save()
-            cart.delete()
+
+            #cart.delete()
 
             return redirect('homepage')
 
     else:
         form = OrderAddressForm()
+        cart = get_or_create_cart(request)
+        cart.session_key = request.session.session_key
+        cart.save()
 
     return render(request, 'complete_order.html', {'form': form})
 

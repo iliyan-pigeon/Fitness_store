@@ -8,14 +8,13 @@ def get_or_create_cart(request):
         cart_id = request.session.get('cart_id')
         if cart_id:
             cart, created = Cart.objects.get_or_create(id=cart_id)
+            cart.session_key = request.session.session_key
+            cart.save()
         else:
             cart = Cart.objects.create()
             request.session['cart_id'] = cart.id
-
-    if not cart.session_key:
-        cart.session_key = request.session.session_key
-        cart.save()
-
+            cart.session_key = request.session.session_key
+            cart.save()
     return cart
 
 
