@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    {% csrf_token %}
     <form method="POST" action="{% url 'complete order' %}">
         {% csrf_token %}
         <div class="profile-item">

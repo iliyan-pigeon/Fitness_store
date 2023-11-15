@@ -207,7 +207,7 @@ def complete_order(request):
                 shipping_details.user = request.user
                 order.user = shipping_details.user
             else:
-                cart = Cart.get_cart_for_user_or_session(request.session.session_key)
+                cart = Cart.get_cart_for_user_or_session(session_key=request.session.session_key)
                 shipping_details.session_key = request.session.session_key
                 order.session_key = shipping_details.session_key
 
@@ -267,3 +267,8 @@ def order_details(request, pk):
 
     return render(request, 'order_details.html', {'order': order})
 
+
+def clear_session(request):
+    # Clear all session data
+    request.session.flush()
+    return redirect('homepage')
