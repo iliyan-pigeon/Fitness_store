@@ -12,6 +12,10 @@ def get_or_create_cart(request):
             cart = Cart.objects.create()
             request.session['cart_id'] = cart.id
 
+    if not cart.session_key:
+        cart.session_key = request.session.session_key
+        cart.save()
+
     return cart
 
 

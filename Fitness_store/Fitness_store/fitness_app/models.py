@@ -163,13 +163,13 @@ class Cart(models.Model):
             return f"Cart for {self.user.username}"
         return "Guest Cart"
 
-    @classmethod
-    def get_cart_for_user_or_session(cls, user=None, session_key=None):
-        if user:
-            return cls.objects.get_or_create(user=user)[0]
-        elif session_key:
-            return cls.objects.get_or_create(session_key=session_key)[0]
-        return None
+    #@classmethod
+    #def get_cart_for_user_or_session(cls, user=None, session_key=None):
+    #    if user:
+    #        return cls.objects.get_or_create(user=user)[0]
+    #    elif session_key:
+    #        return cls.objects.get_or_create(session_key=session_key)[0]
+    #    return None
 
 
 class CartItem(models.Model):

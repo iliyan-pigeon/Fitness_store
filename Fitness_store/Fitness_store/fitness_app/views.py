@@ -207,7 +207,7 @@ def complete_order(request):
                 shipping_details.user = request.user
                 order.user = shipping_details.user
             else:
-                cart = Cart.get_cart_for_user_or_session(session_key=request.session.session_key)
+                cart = Cart.objects.get(session_key=request.session.session_key)
                 shipping_details.session_key = request.session.session_key
                 order.session_key = shipping_details.session_key
 
@@ -227,6 +227,7 @@ def complete_order(request):
 
                 product.amount_in_stock -= i.quantity
                 product.save()
+                print('it gets here')
 
                 order_item, created = OrderItem.objects.get_or_create(
                     order=order,
