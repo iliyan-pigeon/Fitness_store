@@ -115,8 +115,8 @@ class ProfileEditView(views.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class ProfileDeleteView(views.DeleteView):
     model = FitnessUser
-    template_name = 'profile_delete.html'  # Replace with the template name you prefer
-    success_url = reverse_lazy('logout')  # Redirect to the logout view after deletion
+    template_name = 'profile_delete.html'
+    success_url = reverse_lazy('homepage')
 
     def get_object(self, queryset=None):
         return self.request.user
