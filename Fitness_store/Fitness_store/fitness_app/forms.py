@@ -16,11 +16,7 @@ class RegisterUserForm(auth_forms.UserCreationForm):
 
 
 class LoginForm(auth_forms.AuthenticationForm):
-    remember_me = forms.BooleanField(
-        required=False,
-        initial=True,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-    )
+    pass
 
 
 class ProfileEditForm(forms.ModelForm):

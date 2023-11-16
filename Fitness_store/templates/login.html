@@ -16,10 +16,6 @@
             {{ form.password.label_tag }}
             {{ form.password|placeholder:'Enter password:' }}
         </div>
-        <div class="form-group form-check">
-            {{ form.remember_me }}
-            <label class="form-check-label">{{ form.remember_me.label_tag }}</label>
-        </div>
         <button type="submit" class="btn btn-primary my-button">Login</button>
         <a href="{% url 'password reset' %}" class="my-button">Forgotten password</a>
     </form>
