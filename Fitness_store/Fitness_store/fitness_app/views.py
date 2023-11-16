@@ -208,10 +208,8 @@ def complete_order(request):
                 order.user = shipping_details.user
             else:
                 cart = get_or_create_cart(request)
-                print(cart)
                 shipping_details.session_key = request.session.session_key
                 cart.session_key = shipping_details.session_key
-                print(cart.session_key)
                 cart.save()
                 order.session_key = shipping_details.session_key
 
@@ -231,7 +229,6 @@ def complete_order(request):
 
                 product.amount_in_stock -= i.quantity
                 product.save()
-                print('it gets here')
 
                 order_item, created = OrderItem.objects.get_or_create(
                     order=order,
@@ -242,8 +239,7 @@ def complete_order(request):
                     product_type=i.product_type,
                 )
                 order_item.save()
-
-            #cart.delete()
+                i.delete()
 
             return redirect('homepage')
 
