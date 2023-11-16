@@ -10,10 +10,6 @@
             {{ form.username }}
         </div>
         <div class="profile-item">
-            <label for="id_profile_picture">Password:</label>
-            <a href="{% url 'password change' %}">Change password</a>
-        </div>
-        <div class="profile-item">
             <label for="id_profile_picture">First Name:</label>
             {{ form.first_name }}
         </div>
@@ -29,9 +25,14 @@
             <label for="id_email">Email:</label>
             {{ form.email }}
         </div>
+
         <div class="profile-item">
             <label for="id_profile_picture">Profile Picture:</label>
             {{ form.profile_picture }}
+        </div>
+        <div class="profile-item">
+            <label for="id_profile_picture">Password:</label>
+            <a href="{% url 'password change' %}" class="my-button">Change password</a>
         </div>
         {{ form.errors }}
         <div class="profile-buttons">
