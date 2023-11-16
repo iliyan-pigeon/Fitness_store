@@ -144,9 +144,6 @@ def add_to_cart(request, product_type, product_id):
             if not created:
                 cart_item.quantity += 1
                 cart_item.save()
-        #elif cart_item.quantity >= product.amount_in_stock:
-        #    error_message = "Item quantity exceeds available stock."
-        #    return HttpResponseBadRequest(render(request, 'out_of_stock.html', {'error_message': error_message}))
 
     return redirect('homepage')
 
@@ -274,6 +271,5 @@ def order_details(request, pk):
 
 
 def clear_session(request):
-    # Clear all session data
     request.session.flush()
     return redirect('homepage')
