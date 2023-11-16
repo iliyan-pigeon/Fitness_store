@@ -1,0 +1,32 @@
+body {
+    background-color: #444444;
+}
+.delete-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.delete-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    border: 2px solid white;
+    width: 50rem;
+    padding-bottom: 1rem;
+}
+.delete-item p {
+    max-width: 30rem;
+    text-align: center;
+    padding: 1rem;
+}
+.delete-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+}
