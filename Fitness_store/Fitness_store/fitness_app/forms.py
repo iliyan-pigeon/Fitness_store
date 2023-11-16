@@ -33,7 +33,11 @@ class ProfileEditForm(forms.ModelForm):
 
 
 class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].help_text = ''
+        self.fields['new_password1'].help_text = ''
 
 
 class CustomPasswordResetForm(PasswordResetForm):
