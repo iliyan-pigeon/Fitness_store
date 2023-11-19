@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -270,6 +271,7 @@ def order_details(request, pk):
     return render(request, 'order_details.html', {'order': order})
 
 
+@staff_member_required
 def clear_session(request):
     request.session.flush()
     return redirect('homepage')
