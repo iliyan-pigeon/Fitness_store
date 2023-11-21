@@ -70,6 +70,7 @@ class RegisterUserView(views.CreateView):
     success_url = reverse_lazy('homepage')
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         result = super().form_valid(form)
         user = self.object
         login(self.request, user)
