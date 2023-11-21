@@ -3,7 +3,7 @@
 {% block content %}
     <h2 class="edit-profile-header">Edit Profile</h2>
 <div class="profile-container">
-    <form method="POST" action="{% url 'profile edit' request.user.pk %}">
+    <form method="POST" action="{% url 'profile edit' request.user.pk %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="profile-item">
             <label for="id_username">Username:</label>
