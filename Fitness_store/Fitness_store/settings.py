@@ -14,6 +14,7 @@ from pathlib import Path
 
 from django.template.context_processors import media
 from django.urls import reverse_lazy
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ytj3fju!)&#qv1bb%&i(7s%bn(dv=q%u%*%etq95%!gyv+j0%a'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
