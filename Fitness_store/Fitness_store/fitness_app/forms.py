@@ -24,12 +24,6 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserModel
         fields = ['username', 'first_name', 'last_name', 'email', 'gender', 'profile_picture']
-        #labels = {
-        #    'first_name': 'First Name:',
-        #    'last_name': 'Last Name:',
-        #    'image_url': 'Image URL:',
-        #    'age': 'Age:',
-        #}
 
 
 class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
