@@ -6,7 +6,7 @@
     <div class="profile-item">
     <h2>{{ request.user.username }}</h2>
     {% if request.user.profile_picture %}
-        <img src="{{ request.user.profile_picture }}" alt="Service 1">
+        <img src="{{ request.user.profile_picture.url }}" alt="Service 1">
     {% else %}
         <img src="{% static 'images/istockphoto-1433039224-1024x1024.jpg' %}">
     {% endif %}
