@@ -145,7 +145,7 @@ class FitnessUser(auth_models.AbstractUser):
         choices=GENDER_CHOICES,
     )
 
-    profile_picture = models.FileField(
+    profile_picture = models.ImageField(
         null=True,
         blank=True,
         upload_to='profile_pictures',
