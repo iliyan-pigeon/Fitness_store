@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    CustomPasswordResetForm, ProductSearchForm, OrderAddressForm
+    ProductSearchForm, OrderAddressForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 
