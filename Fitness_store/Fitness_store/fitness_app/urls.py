@@ -1,6 +1,6 @@
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path, include
-
+from django.contrib.auth import views as auth_views
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
@@ -25,16 +25,13 @@ urlpatterns = [
     path('remove-from-cart/<str:product_type>/<int:product_id>/', remove_from_cart, name='remove from cart'),
     path('password_change/', PasswordChangeView.as_view(), name='password change'),
     path('password_change/done/', PasswordChangeDoneView.as_view(), name='password change done'),
-    path('password_reset/', CustomPasswordResetView.as_view(), name='password reset'),
-    path('password_reset/done/', PasswordResetDoneView.as_view(), name='password reset done'),
-    path('reset/<uidb64>/<token>/',
-         PasswordResetConfirmView.as_view(template_name='password_reset_confirm_form.html'),
-         name='password_reset_confirm'),
-    path('reset/done/', PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
-         name='password_reset_complete'),
     path('complete_order/', complete_order, name='complete order'),
     path('search_product/', search_product, name='search product'),
     path('orders_for_delivery/', orders_for_delivery, name='orders for delivery'),
     path('order_datails/<int:pk>/', order_details, name='order details'),
-    path('clear/', clear_session, name='clear')
+    path('clear/', clear_session, name='clear'),
+    path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
