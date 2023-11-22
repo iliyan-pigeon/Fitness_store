@@ -187,13 +187,6 @@ class PasswordChangeDoneView(views.TemplateView):
         return context
 
 
-class CustomPasswordResetView(PasswordResetView):
-    form_class = CustomPasswordResetForm
-    template_name = 'password_reset.html'
-    email_template_name = 'password_reset_email.html'
-    success_url = reverse_lazy('password reset done')
-
-
 def complete_order(request):
     if request.method == 'POST':
         form = OrderAddressForm(request.POST)
