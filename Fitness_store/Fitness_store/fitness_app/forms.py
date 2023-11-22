@@ -34,10 +34,6 @@ class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
         self.fields['new_password1'].help_text = ''
 
 
-class CustomPasswordResetForm(PasswordResetForm):
-    pass
-
-
 class ProductSearchForm(forms.Form):
     search_query = forms.CharField(max_length=100, label='')
 
