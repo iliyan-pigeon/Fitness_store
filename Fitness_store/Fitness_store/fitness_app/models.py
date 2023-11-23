@@ -1,6 +1,8 @@
 from django.core import validators
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 
 
@@ -220,3 +222,15 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.name} in Order #{self.order}"
+
+
+class UserPayment(models.Model):
+    user = models.ForeignKey(FitnessUser, on_delete=models.CASCADE)
+    successful_payment = models.BooleanField(default=False)
+    stripe_checkout_id = models.CharField(max_length=500)
+
+
+@receiver(post_save, sender=FitnessUser)
+def create_user_payment(sender, instance, created, **kwargs):
+    if created:
+        UserPayment.objects.create(user=instance)
