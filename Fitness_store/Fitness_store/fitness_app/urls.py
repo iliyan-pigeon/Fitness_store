@@ -5,7 +5,8 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
-    search_product, complete_order, orders_for_delivery, order_details, clear_session
+    search_product, complete_order, orders_for_delivery, order_details, clear_session, payment, payment_successful, \
+    payment_cancelled, stripe_webhook
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -42,4 +43,8 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
          name='password_reset_complete'),
+    path('payment/', payment, name='payment'),
+    path('payment_successful/', payment_successful, name='payment successful'),
+    path('payment_cancelled/', payment_cancelled, name='payment cancelled'),
+    path('stripe_webhook/', stripe_webhook, name='stripe webhook'),
 ]
