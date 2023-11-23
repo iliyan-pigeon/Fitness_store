@@ -5,8 +5,7 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
-    search_product, complete_order, orders_for_delivery, order_details, clear_session, payment, payment_successful, \
-    payment_cancelled, stripe_webhook
+    search_product, complete_order, orders_for_delivery, order_details, clear_session
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
