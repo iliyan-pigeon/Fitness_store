@@ -271,3 +271,19 @@ def order_details(request, pk):
 def clear_session(request):
     request.session.flush()
     return redirect('homepage')
+
+
+def payment(request):
+    pass
+
+
+def payment_successful(request):
+    pass
+
+
+def payment_cancelled(request):
+    pass
+
+
+def stripe_webhook(request):
+    pass
