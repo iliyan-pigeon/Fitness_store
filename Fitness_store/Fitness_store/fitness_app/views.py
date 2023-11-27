@@ -302,3 +302,7 @@ class CreateCheckoutSessionView(views.View):
         return JsonResponse({
             'id': checkout_session.id
         })
+
+
+class PaymentView(views.TemplateView):
+    template_name = 'payment.html'
