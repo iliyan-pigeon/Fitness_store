@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
-from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 
 from Fitness_store.fitness_app.models import FitnessUser, Order
@@ -43,3 +43,11 @@ class OrderAddressForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['address', 'city', 'region', 'zipcode']
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password1'].help_text = ''
