@@ -7,7 +7,8 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
-    search_product, complete_order, orders_for_delivery, order_details, clear_session, CustomPasswordResetConfirmView
+    search_product, complete_order, orders_for_delivery, order_details, clear_session, CustomPasswordResetConfirmView, \
+    CreateCheckoutSessionView, PaymentView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -44,4 +45,7 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
          name='password_reset_complete'),
+    path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+    path('payment', PaymentView.as_view(), name='payment'),
+
 ]
