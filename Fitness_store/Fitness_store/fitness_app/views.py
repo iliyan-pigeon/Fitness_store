@@ -14,7 +14,8 @@ from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, Profile
     ProductSearchForm, OrderAddressForm, CustomSetPasswordForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
-from decouple import config
+import stripe
+
 
 UserModel = get_user_model()
 
@@ -274,3 +275,19 @@ def clear_session(request):
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
+
+
+class CreateCheckoutSessionView(views.View):
+    def post(self, request, *args, **kwargs):
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': '{{PRICE_ID}}',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/success.html',
+            cancel_url=YOUR_DOMAIN + '/cancel.html',
+        )
