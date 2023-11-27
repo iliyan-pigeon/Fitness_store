@@ -278,16 +278,27 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 class CreateCheckoutSessionView(views.View):
+
     def post(self, request, *args, **kwargs):
+        YOUR_DOMAIN = 'http://127.0.0.1:8000'
         checkout_session = stripe.checkout.Session.create(
+            payment_method_cards=['card'],
             line_items=[
                 {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': '{{PRICE_ID}}',
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': 2000,
+                        'product_data': {
+                            'name': 'The name'
+                        }
+                    },
                     'quantity': 1,
                 },
             ],
             mode='payment',
-            success_url=YOUR_DOMAIN + '/success.html',
-            cancel_url=YOUR_DOMAIN + '/cancel.html',
+            success_url=YOUR_DOMAIN + '/success/',
+            cancel_url=YOUR_DOMAIN + '/cancel/',
         )
+        return JsonResponse({
+            'id': checkout_session.id
+        })
