@@ -16,6 +16,7 @@ from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, Ca
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 import stripe
 
+from Fitness_store.settings import STRIPE_SECRET_KEY
 
 UserModel = get_user_model()
 
@@ -277,12 +278,15 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
 
 
+stripe.api_key = STRIPE_SECRET_KEY
+
+
 class CreateCheckoutSessionView(views.View):
 
     def post(self, request, *args, **kwargs):
         YOUR_DOMAIN = 'http://127.0.0.1:8000'
         checkout_session = stripe.checkout.Session.create(
-            payment_method_cards=['card'],
+            payment_method_types=['card'],
             line_items=[
                 {
                     'price_data': {
