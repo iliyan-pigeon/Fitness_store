@@ -1,11 +1,13 @@
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+
+from Fitness_store.fitness_app.forms import CustomSetPasswordForm
 from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, SupplementsPageView, GymEquipmentPageView, \
     ContactsPageView, LoginUserView, EquipmentProductPageView, SupplementProductPageView, \
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
-    search_product, complete_order, orders_for_delivery, order_details, clear_session
+    search_product, complete_order, orders_for_delivery, order_details, clear_session, CustomPasswordResetConfirmView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -37,7 +39,7 @@ urlpatterns = [
          auth_views.PasswordResetDoneView.as_view(template_name='password_reset_sent.html'),
          name='password_reset_done'),
     path('reset/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+         CustomPasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
          name='password_reset_confirm'),
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
