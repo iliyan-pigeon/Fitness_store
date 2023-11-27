@@ -2,7 +2,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
-    ProductSearchForm, OrderAddressForm
+    ProductSearchForm, OrderAddressForm, CustomSetPasswordForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 from decouple import config
@@ -270,3 +270,7 @@ def order_details(request, pk):
 def clear_session(request):
     request.session.flush()
     return redirect('homepage')
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = CustomSetPasswordForm
