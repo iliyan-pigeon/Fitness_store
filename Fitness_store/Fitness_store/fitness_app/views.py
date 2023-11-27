@@ -14,11 +14,10 @@ from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, Profile
     ProductSearchForm, OrderAddressForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
-import stripe
 from decouple import config
 
 UserModel = get_user_model()
-stripe.api_key = config("stripe.api_key")
+
 
 class HomePageView(views.TemplateView):
     template_name = 'homepage.html'
