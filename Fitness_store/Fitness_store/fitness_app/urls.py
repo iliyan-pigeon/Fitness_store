@@ -8,7 +8,7 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
     search_product, complete_order, orders_for_delivery, order_details, clear_session, CustomPasswordResetConfirmView, \
-    CreateCheckoutSessionView, PaymentView
+    CreateCheckoutSessionView, PaymentView, SuccessView, CancelView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -47,5 +47,6 @@ urlpatterns = [
          name='password_reset_complete'),
     path('create-checkout-session', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('payment', PaymentView.as_view(), name='payment'),
-
+    path('success/', SuccessView.as_view(), name='success'),
+    path('cancel/', CancelView.as_view(), name='cancel'),
 ]
