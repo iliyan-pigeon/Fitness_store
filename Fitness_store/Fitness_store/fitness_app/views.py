@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
@@ -287,6 +289,7 @@ stripe.api_key = STRIPE_SECRET_KEY
 class CreateCheckoutSessionView(views.View):
 
     def post(self, request, *args, **kwargs):
+        cart_items = ''
         cart_total = 0
 
         if request.user.is_authenticated:
@@ -294,12 +297,12 @@ class CreateCheckoutSessionView(views.View):
 
             if cart:
                 cart_items = cart.cartitem_set.all()
-                cart_total = sum(item.price * item.quantity for item in cart_items)
+                cart_total = int(sum(item.price * item.quantity for item in cart_items)) * 100
 
         elif 'cart_id' in request.session:
             cart_data = Cart.objects.get(id=request.session.get('cart_id')).cartitem_set.all()
             cart_items = cart_data
-            cart_total = sum(item.price * item.quantity for item in cart_items)
+            cart_total = int(sum(item.price * item.quantity for item in cart_items)) * 100
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -316,6 +319,10 @@ class CreateCheckoutSessionView(views.View):
                     'quantity': 1,
                 },
             ],
+            metadata={
+                'cart_items': cart_items,
+                'cart_total': cart_total,
+            },
             mode='payment',
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/cancel/',
@@ -366,7 +373,8 @@ def stripe_webhook(request):
         session = event['data']['object']
 
         customer_email = session["customer_details"]["email"]
-        product_id = session["metadata"]["product_id"]
+        cart_items = session["metadata"]["cart_items"]
+        cart_total = session["metadata"]["cart_total"]
 
         send_mail(
             subject="Here is your purchase",
@@ -375,24 +383,4 @@ def stripe_webhook(request):
             from_email="pure.strength.site@gmail.com"
         )
 
-        # TODO - decide whether you want to send the file or the URL
-
-    elif event["type"] == "payment_intent.succeeded":
-        intent = event['data']['object']
-
-        stripe_customer_id = intent["customer"]
-        stripe_customer = stripe.Customer.retrieve(stripe_customer_id)
-
-        customer_email = stripe_customer['email']
-        product_id = intent["metadata"]["product_id"]
-
-        send_mail(
-            subject="Here is your product",
-            message=f"Thanks for your purchase.",
-            recipient_list=[customer_email],
-            from_email="pure.strength.site@gmail.com"
-        )
-
     return HttpResponse(status=200)
-
-
