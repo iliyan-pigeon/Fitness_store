@@ -331,3 +331,11 @@ class PaymentView(views.TemplateView):
             "STRIPE_PUBLIC_KEY": STRIPE_PUBLIC_KEY
         })
         return context
+
+
+class SuccessView(views.TemplateView):
+    template_name = 'success.html'
+
+
+class CancelView(views.TemplateView):
+    template_name = 'cancel.html'
