@@ -3,20 +3,23 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.core.mail import send_mail
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic as views
+from django.views.decorators.csrf import csrf_exempt
+
 from Fitness_store.fitness_app.forms import LoginForm, RegisterUserForm, ProfileEditForm, CustomPasswordChangeForm, \
     ProductSearchForm, OrderAddressForm, CustomSetPasswordForm
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, CartItem, FitnessUser, Order, OrderItem
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 import stripe
 
-from Fitness_store.settings import STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY
+from Fitness_store.settings import STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY, STRIPE_WEBHOOK_SECRET
 
 UserModel = get_user_model()
 
@@ -339,3 +342,57 @@ class SuccessView(views.TemplateView):
 
 class CancelView(views.TemplateView):
     template_name = 'cancel.html'
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        customer_email = session["customer_details"]["email"]
+        product_id = session["metadata"]["product_id"]
+
+        send_mail(
+            subject="Here is your purchase",
+            message=f"Thanks for your purchase.",
+            recipient_list=[customer_email],
+            from_email="pure.strength.site@gmail.com"
+        )
+
+        # TODO - decide whether you want to send the file or the URL
+
+    elif event["type"] == "payment_intent.succeeded":
+        intent = event['data']['object']
+
+        stripe_customer_id = intent["customer"]
+        stripe_customer = stripe.Customer.retrieve(stripe_customer_id)
+
+        customer_email = stripe_customer['email']
+        product_id = intent["metadata"]["product_id"]
+
+        send_mail(
+            subject="Here is your product",
+            message=f"Thanks for your purchase.",
+            recipient_list=[customer_email],
+            from_email="pure.strength.site@gmail.com"
+        )
+
+    return HttpResponse(status=200)
+
+
