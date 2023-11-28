@@ -174,8 +174,8 @@ button:disabled {
           alt="The cover of Stubborn Attachments"
         /> {% endcomment %}
         <div class="description">
-          <h3>Cart Total Amount</h3>
-          <h5>${{ cart_total }}</h5>
+          <h3>{{ product.name }}</h3>
+          <h5>${{ product.get_display_price }}</h5>
         </div>
       </div>
       <button type="button" id="checkout-button">Checkout</button>
@@ -200,10 +200,10 @@ button:disabled {
   <script type="text/javascript">
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     // Create an instance of the Stripe object with your publishable API key
-    let stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
-    let checkoutButton = document.getElementById("checkout-button");
+    var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+    var checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function () {
-      fetch("{% url 'create-checkout-session' %}", {
+      fetch("{% url 'create-checkout-session' product.id %}", {
         method: "POST",
         headers: {
             'X-CSRFToken': csrftoken
@@ -231,8 +231,8 @@ button:disabled {
     // Disable the button until we have Stripe set up on the page
     document.querySelector("button").disabled = true;
 
-    let elements = stripe.elements();
-    let style = {
+    var elements = stripe.elements();
+    var style = {
       base: {
         color: "#32325d",
         fontFamily: 'Arial, sans-serif',
@@ -248,7 +248,7 @@ button:disabled {
         iconColor: "#fa755a"
       }
     };
-    let card = elements.create("card", { style: style });
+    var card = elements.create("card", { style: style });
     // Stripe injects an iframe into the DOM
     card.mount("#card-element");
     card.on("change", function (event) {
@@ -256,11 +256,11 @@ button:disabled {
       document.querySelector("button").disabled = event.empty;
       document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
     });
-    let form = document.getElementById("payment-form");
+    var form = document.getElementById("payment-form");
     form.addEventListener("submit", function(event) {
       event.preventDefault();
       // Complete payment when the submit button is clicked
-      fetch("{% url 'create-payment-intent' %}", {
+      fetch("{% url 'create-payment-intent' product.id %}", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -281,7 +281,7 @@ button:disabled {
     // Calls stripe.confirmCardPayment
     // If the card requires authentication Stripe shows a pop-up modal to
     // prompt the user to enter authentication details without leaving your page.
-    let payWithCard = function(stripe, card, clientSecret) {
+    var payWithCard = function(stripe, card, clientSecret) {
       loading(true);
       stripe
         .confirmCardPayment(clientSecret, {
@@ -301,7 +301,7 @@ button:disabled {
     };
     /* ------- UI helpers ------- */
     // Shows a success message when the payment is complete
-    let orderComplete = function(paymentIntentId) {
+    var orderComplete = function(paymentIntentId) {
       loading(false);
       document
         .querySelector(".result-message a")
@@ -313,16 +313,16 @@ button:disabled {
       document.querySelector("button").disabled = true;
     };
     // Show the customer the error from Stripe if their card fails to charge
-    let showError = function(errorMsgText) {
+    var showError = function(errorMsgText) {
       loading(false);
-      let errorMsg = document.querySelector("#card-error");
+      var errorMsg = document.querySelector("#card-error");
       errorMsg.textContent = errorMsgText;
       setTimeout(function() {
         errorMsg.textContent = "";
       }, 4000);
     };
     // Show a spinner on payment submission
-    let loading = function(isLoading) {
+    var loading = function(isLoading) {
       if (isLoading) {
         // Disable the button and show a spinner
         document.querySelector("button").disabled = true;
