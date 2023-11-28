@@ -16,7 +16,7 @@ from Fitness_store.fitness_app.models import Supplements, GymEquipment, Cart, Ca
 from Fitness_store.fitness_app.utils import get_or_create_cart, get_or_create_order
 import stripe
 
-from Fitness_store.settings import STRIPE_SECRET_KEY
+from Fitness_store.settings import STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY
 
 UserModel = get_user_model()
 
@@ -324,3 +324,10 @@ class CreateCheckoutSessionView(views.View):
 
 class PaymentView(views.TemplateView):
     template_name = 'payment.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentView, self).get_context_data(**kwargs)
+        context.update({
+            "STRIPE_PUBLIC_KEY": STRIPE_PUBLIC_KEY
+        })
+        return context
