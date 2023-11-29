@@ -8,7 +8,7 @@ from Fitness_store.fitness_app.views import HomePageView, AboutUsPageView, Suppl
     RegisterUserView, LogoutUserView, ProfileDetailView, ProfileEditView, ProfileDeleteView, add_to_cart, \
     remove_from_cart, PasswordChangeView, PasswordChangeDoneView, \
     search_product, complete_order, orders_for_delivery, order_details, clear_session, CustomPasswordResetConfirmView, \
-    CreateCheckoutSessionView, PaymentView, SuccessView, CancelView, stripe_webhook
+    CreateCheckoutSessionView, PaymentView, SuccessView, CancelView, stripe_webhook, payment_on_delivery_view
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
@@ -50,4 +50,5 @@ urlpatterns = [
     path('success/', SuccessView.as_view(), name='success'),
     path('cancel/', CancelView.as_view(), name='cancel'),
     path('webhooks/stripe/', stripe_webhook, name='stripe-webhook'),
+    path('payment_on_delivery/', payment_on_delivery_view, name='payment on delivery'),
 ]
