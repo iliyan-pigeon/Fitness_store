@@ -400,3 +400,41 @@ def stripe_webhook(request):
         print(customer_email)
 
     return HttpResponse(status=200)
+
+
+def payment_on_delivery_view(request):
+    cart = None
+    cart_items = ''
+    cart_total = 0
+
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user).first()
+
+        if cart:
+            cart_items = cart.cartitem_set.all()
+            cart_total = sum(item.price * item.quantity for item in cart_items)
+
+    elif 'cart_id' in request.session:
+        cart = Cart.objects.get(id=request.session.get('cart_id'))
+        cart_data = cart.cartitem_set.all()
+        cart_items = cart_data
+        cart_total = sum(item.price * item.quantity for item in cart_items)
+
+    for i in CartItem.objects.filter(cart_id=cart.id):
+        product = None
+        if i.product_type == "supplement":
+            product = Supplements.objects.get(id=i.product_id)
+        elif i.product_type == "gym_equipment":
+            product = GymEquipment.objects.get(id=i.product_id)
+
+        product.amount_in_stock -= i.quantity
+        product.save()
+        i.delete()
+
+    order = get_or_create_order(request)
+    order.payment = f"Amount for payment: ${cart_total}"
+    order.save()
+
+    return redirect('success')
+
+
