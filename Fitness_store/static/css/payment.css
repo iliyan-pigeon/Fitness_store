@@ -1,0 +1,23 @@
+.product{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.product-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    border: 2px solid white;
+    width: 50rem;
+    padding-bottom: 1rem;
+}
+.description{
+    max-width: 30rem;
+    text-align: center;
+    padding: 1rem;
+}
