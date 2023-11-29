@@ -378,9 +378,11 @@ def stripe_webhook(request):
 
         send_mail(
             subject="Here is your purchase",
-            message=f"Thanks for your purchase.",
+            message=f"Thanks for your purchase. You ordered {cart_items}"
+                    f" for total amount of {cart_total} paid with card.",
             recipient_list=[customer_email],
             from_email="pure.strength.site@gmail.com"
         )
+        print(customer_email)
 
     return HttpResponse(status=200)
