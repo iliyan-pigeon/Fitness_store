@@ -297,7 +297,8 @@ class CreateCheckoutSessionView(views.View):
                 cart_total = int(sum(item.price * item.quantity for item in cart_items)) * 100
 
         elif 'cart_id' in request.session:
-            cart_data = Cart.objects.get(id=request.session.get('cart_id')).cartitem_set.all()
+            cart = Cart.objects.get(id=request.session.get('cart_id'))
+            cart_data = cart.cartitem_set.all()
             cart_items = cart_data
             cart_total = int(sum(item.price * item.quantity for item in cart_items)) * 100
         YOUR_DOMAIN = "http://127.0.0.1:8000"
