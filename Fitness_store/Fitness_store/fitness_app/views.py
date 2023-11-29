@@ -227,9 +227,6 @@ def complete_order(request):
                 elif i.product_type == "gym_equipment":
                     product = GymEquipment.objects.get(id=i.product_id)
 
-                product.amount_in_stock -= i.quantity
-                product.save()
-
                 order_item, created = OrderItem.objects.get_or_create(
                     order=order,
                     name=product.name,
@@ -239,9 +236,8 @@ def complete_order(request):
                     product_type=i.product_type,
                 )
                 order_item.save()
-                i.delete()
 
-            return redirect('homepage')
+            return redirect('payment')
 
     else:
         form = OrderAddressForm()
@@ -289,6 +285,7 @@ stripe.api_key = STRIPE_SECRET_KEY
 class CreateCheckoutSessionView(views.View):
 
     def post(self, request, *args, **kwargs):
+        cart = None
         cart_items = ''
         cart_total = 0
 
@@ -327,6 +324,18 @@ class CreateCheckoutSessionView(views.View):
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/cancel/',
         )
+
+        for i in CartItem.objects.filter(cart_id=cart.id):
+            product = None
+            if i.product_type == "supplement":
+                product = Supplements.objects.get(id=i.product_id)
+            elif i.product_type == "gym_equipment":
+                product = GymEquipment.objects.get(id=i.product_id)
+
+            product.amount_in_stock -= i.quantity
+            product.save()
+            i.delete()
+
         return JsonResponse({
             'id': checkout_session.id
         })
