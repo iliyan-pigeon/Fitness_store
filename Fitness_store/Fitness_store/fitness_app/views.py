@@ -337,6 +337,10 @@ class CreateCheckoutSessionView(views.View):
             product.save()
             i.delete()
 
+        order = get_or_create_order(request)
+        order.payment = "Payed with card"
+        order.save()
+
         return JsonResponse({
             'id': checkout_session.id
         })
