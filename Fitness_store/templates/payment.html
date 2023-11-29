@@ -13,8 +13,14 @@
         /> {% endcomment %}
       <div class="product-item">
         <div class="description">
+          <h1>Cart Checkout Page</h1>
+            {% for product in cart_items %}
+                <h3>{{ product.name }}</h3>
+                <p>Amount: {{ product.quantity }}</p>
+                <p>Price: {{ product.price }} * {{ product.quantity }}</p>
+            {% endfor %}
           <h3>Cart Total Price</h3>
-          <h5>${{ cart_total }}</h5>
+          <h3>${{ cart_total }}</h3>
         </div>
         <button type="button" id="checkout-button" class="my-button">Checkout</button>
       </div>
