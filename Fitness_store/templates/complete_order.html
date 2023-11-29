@@ -2,6 +2,7 @@
 {% block content %}
 {% load static %}
 
+<div class="profile-container">
     <form method="POST" action="{% url 'complete order' %}">
         {% csrf_token %}
         <div class="profile-item">
@@ -21,7 +22,9 @@
             {{ form.zipcode }}
         </div>
         <div class="profile-buttons">
-            <button type="submit" class="btn my-button btn-secondary">Save changes</button>
+            <button type="submit" class="btn my-button btn-secondary">Confirm address</button>
         </div>
     </form>
+</div>
+
 {% endblock %}
