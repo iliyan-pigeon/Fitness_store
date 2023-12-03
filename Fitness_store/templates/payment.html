@@ -28,8 +28,8 @@
     {% csrf_token %}
   <script type="text/javascript">
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
-    var checkoutButton = document.getElementById("checkout-button");
+    let stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+    let checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function () {
       fetch("{% url 'create-checkout-session' %}", {
         method: "POST",
