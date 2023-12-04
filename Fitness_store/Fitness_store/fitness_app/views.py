@@ -436,5 +436,3 @@ def payment_on_delivery_view(request):
     order.save()
 
     return redirect('success')
-
-

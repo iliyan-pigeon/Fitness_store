@@ -15,6 +15,8 @@ from pathlib import Path
 from django.template.context_processors import media
 from django.urls import reverse_lazy
 from decouple import config
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
