@@ -108,3 +108,21 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'description': ['This field cannot be blank.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_best_selling_is_null(self):
+        self.supplement.best_selling = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'best_selling': ['“None” value must be either True or False.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_best_selling_is_blank(self):
+        self.supplement.best_selling = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'best_selling': ['“” value must be either True or False.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
