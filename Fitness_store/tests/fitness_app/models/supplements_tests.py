@@ -51,3 +51,13 @@ class SupplementsTest(TestCase):
         expected_error_message = {'name': [f'Ensure this value has at least {self.NAME_MIN_LENGTH}'
                                            f' characters (it has {self.NAME_MIN_LENGTH-1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_name_is_null(self):
+        self.supplement.name = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'name': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+        
