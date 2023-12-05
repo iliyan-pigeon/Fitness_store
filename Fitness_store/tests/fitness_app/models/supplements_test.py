@@ -213,3 +213,22 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'amount_in_stock': ['“” value must be an integer.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_photo_is_null(self):
+        self.supplement.photo = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'photo': ['This field cannot be blank.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_photo_is_blank(self):
+        self.supplement.photo = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'photo': ['This field cannot be blank.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+        
