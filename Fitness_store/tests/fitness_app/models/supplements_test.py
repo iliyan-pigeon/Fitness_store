@@ -14,7 +14,6 @@ class SupplementsTest(TestCase):
         self.VALID_DATA = {
             'name': 'Test Supplement',
             'description': 'This is a test supplement description.',
-            'best_selling': True,
             'amount': 100,
             'amount_type': 'mg',
             'price': 10.99,
@@ -26,7 +25,7 @@ class SupplementsTest(TestCase):
     def test_valid_supplement_creation(self):
         self.assertEqual(self.supplement.name, 'Test Supplement')
         self.assertEqual(self.supplement.description, 'This is a test supplement description.')
-        self.assertEqual(self.supplement.best_selling, True)
+        self.assertEqual(self.supplement.best_selling, False)
         self.assertEqual(self.supplement.amount, 100)
         self.assertEqual(self.supplement.amount_type, 'mg')
         self.assertEqual(self.supplement.price, 10.99)
@@ -126,3 +125,9 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'best_selling': ['“” value must be either True or False.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_true_assigned_to_best_selling(self):
+        self.supplement.best_selling = True
+
+        self.assertEqual(self.supplement.best_selling, True)
+        
