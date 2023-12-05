@@ -6,6 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 class SupplementsTest(TestCase):
     NAME_MAX_LENGTH = 30
+    NAME_MIN_LENGTH = 2
 
     def setUp(self):
         self.VALID_DATA = {
@@ -37,5 +38,7 @@ class SupplementsTest(TestCase):
         with self.assertRaises(ValidationError) as ve:
             self.supplement.full_clean()
 
-        expected_error_message = {'name': ['Ensure this value has at most 30 characters (it has 31).']}
+        expected_error_message = {'name': [f'Ensure this value has at most '
+                                           f'{self.NAME_MAX_LENGTH} characters (it has {self.NAME_MAX_LENGTH+1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
