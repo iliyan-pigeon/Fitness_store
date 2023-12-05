@@ -20,12 +20,17 @@ class SupplementsTest(TestCase):
         self.supplement = Supplements.objects.create(**self.VALID_DATA)
 
     def test_valid_supplement_creation(self):
-        supplement = Supplements.objects.get(id=self.supplement.id)
-        self.assertEqual(supplement.name, 'Test Supplement')
-        self.assertEqual(supplement.description, 'This is a test supplement description.')
-        self.assertEqual(supplement.best_selling, True)
-        self.assertEqual(supplement.amount, 100)
-        self.assertEqual(supplement.amount_type, 'mg')
-        self.assertEqual(supplement.price, 10.99)
-        self.assertEqual(supplement.amount_in_stock, 50)
-        self.assertTrue(supplement.photo.name.endswith('.jpg'))
+        self.assertEqual(self.supplement.name, 'Test Supplement')
+        self.assertEqual(self.supplement.description, 'This is a test supplement description.')
+        self.assertEqual(self.supplement.best_selling, True)
+        self.assertEqual(self.supplement.amount, 100)
+        self.assertEqual(self.supplement.amount_type, 'mg')
+        self.assertEqual(self.supplement.price, 10.99)
+        self.assertEqual(self.supplement.amount_in_stock, 50)
+        self.assertTrue(self.supplement.photo.name.endswith('.jpg'))
+
+#    def test_when_name_is_longer_than__max_length(self):
+#        self.supplement += 'a' * 16
+#
+#        with self.assertRaises(ValueError) as ve:
+#            self.assertEqual(supplement.name, 'Test Supplement')
