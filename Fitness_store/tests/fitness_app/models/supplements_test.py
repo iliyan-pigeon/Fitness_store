@@ -148,3 +148,21 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'amount': ['“” value must be an integer.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_type_is_null(self):
+        self.supplement.amount_type = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount_type': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_type_is_blank(self):
+        self.supplement.amount_type = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount_type': ['This field cannot be blank.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
