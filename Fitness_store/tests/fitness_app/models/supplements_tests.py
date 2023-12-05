@@ -92,15 +92,15 @@ class SupplementsTest(TestCase):
                                                   f' characters (it has {self.DESCRIPTION_MIN_LENGTH - 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
 
-#    def test_when_name_is_null(self):
-#        self.supplement.name = None
-#
-#        with self.assertRaises(ValidationError) as ve:
-#            self.supplement.full_clean()
-#
-#        expected_error_message = {'name': ['This field cannot be null.']}
-#        self.assertEqual(expected_error_message, ve.exception.message_dict)
-#
+    def test_when_description_is_null(self):
+        self.supplement.description = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'description': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
 #    def test_when_name_is_blank(self):
 #        self.supplement.name = ''
 #
