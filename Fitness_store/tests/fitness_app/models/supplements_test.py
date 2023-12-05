@@ -130,4 +130,21 @@ class SupplementsTest(TestCase):
         self.supplement.best_selling = True
 
         self.assertEqual(self.supplement.best_selling, True)
-        
+
+    def test_when_amount_is_null(self):
+        self.supplement.amount = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_is_blank(self):
+        self.supplement.amount = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount': ['“” value must be an integer.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
