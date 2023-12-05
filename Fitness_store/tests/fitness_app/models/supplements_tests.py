@@ -30,8 +30,12 @@ class SupplementsTest(TestCase):
         self.assertEqual(self.supplement.amount_in_stock, 50)
         self.assertTrue(self.supplement.photo.name.endswith('.jpg'))
 
-#    def test_when_name_is_longer_than__max_length(self):
-#        self.supplement += 'a' * 16
-#
-#        with self.assertRaises(ValueError) as ve:
-#            self.assertEqual(supplement.name, 'Test Supplement')
+    def test_when_name_is_longer_than__max_length(self):
+        self.supplement.name = 'a' * 31
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'name': ['Ensure this value has at most 30 characters (it has 31).']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+        
