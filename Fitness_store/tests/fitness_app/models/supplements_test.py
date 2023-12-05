@@ -195,3 +195,21 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'price': ['“” value must be a float.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_in_stock_is_null(self):
+        self.supplement.amount_in_stock = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount_in_stock': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_in_stock_is_blank(self):
+        self.supplement.amount_in_stock = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount_in_stock': ['“” value must be an integer.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
