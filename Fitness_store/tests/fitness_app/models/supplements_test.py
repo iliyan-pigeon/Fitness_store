@@ -73,7 +73,6 @@ class SupplementsTest(TestCase):
 
     def test_when_description_is_longer_than__max_length(self):
         self.supplement.description = 'a' * self.DESCRIPTION_MAX_LENGTH + 'a'
-        print(len(self.supplement.description))
 
         with self.assertRaises(ValidationError) as ve:
             self.supplement.full_clean()
