@@ -9,6 +9,7 @@ class SupplementsTest(TestCase):
     NAME_MIN_LENGTH = 2
     DESCRIPTION_MAX_LENGTH = 300
     DESCRIPTION_MIN_LENGTH = 5
+    AMOUNT_TYPE_MAX_LENGTH = 30
 
     def setUp(self):
         self.VALID_DATA = {
@@ -165,4 +166,14 @@ class SupplementsTest(TestCase):
             self.supplement.full_clean()
 
         expected_error_message = {'amount_type': ['This field cannot be blank.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_amount_type_is_longer_than__max_length(self):
+        self.supplement.amount_type = 'a' * self.AMOUNT_TYPE_MAX_LENGTH + 'a'
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'amount_type': [f'Ensure this value has at most {self.NAME_MAX_LENGTH} characters'
+                                                  f' (it has {self.NAME_MAX_LENGTH + 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
