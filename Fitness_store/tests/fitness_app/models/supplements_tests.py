@@ -5,6 +5,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class SupplementsTest(TestCase):
+    NAME_MAX_LENGTH = 30
 
     def setUp(self):
         self.VALID_DATA = {
@@ -31,11 +32,10 @@ class SupplementsTest(TestCase):
         self.assertTrue(self.supplement.photo.name.endswith('.jpg'))
 
     def test_when_name_is_longer_than__max_length(self):
-        self.supplement.name = 'a' * 31
+        self.supplement.name = 'a' * self.NAME_MAX_LENGTH + 'a'
 
         with self.assertRaises(ValidationError) as ve:
             self.supplement.full_clean()
 
         expected_error_message = {'name': ['Ensure this value has at most 30 characters (it has 31).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
-        
