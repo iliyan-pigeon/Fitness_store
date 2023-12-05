@@ -24,7 +24,6 @@ class SupplementsTest(TestCase):
         self.supplement = Supplements.objects.create(**self.VALID_DATA)
 
     def test_valid_supplement_creation(self):
-
         self.assertEqual(self.supplement.name, 'Test Supplement')
         self.assertEqual(self.supplement.description, 'This is a test supplement description.')
         self.assertEqual(self.supplement.best_selling, True)
@@ -41,7 +40,7 @@ class SupplementsTest(TestCase):
             self.supplement.full_clean()
 
         expected_error_message = {'name': [f'Ensure this value has at most '
-                                           f'{self.NAME_MAX_LENGTH} characters (it has {self.NAME_MAX_LENGTH+1}).']}
+                                           f'{self.NAME_MAX_LENGTH} characters (it has {self.NAME_MAX_LENGTH + 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
 
     def test_when_name_is_shorter_than__MinLengthValidator(self):
@@ -51,7 +50,7 @@ class SupplementsTest(TestCase):
             self.supplement.full_clean()
 
         expected_error_message = {'name': [f'Ensure this value has at least {self.NAME_MIN_LENGTH}'
-                                           f' characters (it has {self.NAME_MIN_LENGTH-1}).']}
+                                           f' characters (it has {self.NAME_MIN_LENGTH - 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
 
     def test_when_name_is_null(self):
@@ -80,19 +79,19 @@ class SupplementsTest(TestCase):
             self.supplement.full_clean()
 
         expected_error_message = {'description': [f'Ensure this value has at most {self.DESCRIPTION_MAX_LENGTH}'
-                                                  f' characters (it has {self.DESCRIPTION_MAX_LENGTH+1}).']}
+                                                  f' characters (it has {self.DESCRIPTION_MAX_LENGTH + 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
 
-#    def test_when_name_is_shorter_than__MinLengthValidator(self):
-#        self.supplement.name = 'a' * (self.NAME_MIN_LENGTH - 1)
-#
-#        with self.assertRaises(ValidationError) as ve:
-#            self.supplement.full_clean()
-#
-#        expected_error_message = {'name': [f'Ensure this value has at least {self.NAME_MIN_LENGTH}'
-#                                           f' characters (it has {self.NAME_MIN_LENGTH-1}).']}
-#        self.assertEqual(expected_error_message, ve.exception.message_dict)
-#
+    def test_when_description_is_shorter_than__MinLengthValidator(self):
+        self.supplement.description = 'a' * (self.DESCRIPTION_MIN_LENGTH - 1)
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'description': [f'Ensure this value has at least {self.DESCRIPTION_MIN_LENGTH}'
+                                                  f' characters (it has {self.DESCRIPTION_MIN_LENGTH - 1}).']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
 #    def test_when_name_is_null(self):
 #        self.supplement.name = None
 #
