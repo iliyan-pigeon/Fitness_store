@@ -231,4 +231,3 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'photo': ['This field cannot be blank.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
-        
