@@ -7,6 +7,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 class SupplementsTest(TestCase):
     NAME_MAX_LENGTH = 30
     NAME_MIN_LENGTH = 2
+    DESCRIPTION_MAX_LENGTH = 300
+    DESCRIPTION_MIN_LENGTH = 5
 
     def setUp(self):
         self.VALID_DATA = {
@@ -69,4 +71,42 @@ class SupplementsTest(TestCase):
 
         expected_error_message = {'name': ['This field cannot be blank.']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
-        
+
+    def test_when_description_is_longer_than__max_length(self):
+        self.supplement.description = 'a' * self.DESCRIPTION_MAX_LENGTH + 'a'
+        print(len(self.supplement.description))
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'description': [f'Ensure this value has at most {self.DESCRIPTION_MAX_LENGTH}'
+                                                  f' characters (it has {self.DESCRIPTION_MAX_LENGTH+1}).']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+#    def test_when_name_is_shorter_than__MinLengthValidator(self):
+#        self.supplement.name = 'a' * (self.NAME_MIN_LENGTH - 1)
+#
+#        with self.assertRaises(ValidationError) as ve:
+#            self.supplement.full_clean()
+#
+#        expected_error_message = {'name': [f'Ensure this value has at least {self.NAME_MIN_LENGTH}'
+#                                           f' characters (it has {self.NAME_MIN_LENGTH-1}).']}
+#        self.assertEqual(expected_error_message, ve.exception.message_dict)
+#
+#    def test_when_name_is_null(self):
+#        self.supplement.name = None
+#
+#        with self.assertRaises(ValidationError) as ve:
+#            self.supplement.full_clean()
+#
+#        expected_error_message = {'name': ['This field cannot be null.']}
+#        self.assertEqual(expected_error_message, ve.exception.message_dict)
+#
+#    def test_when_name_is_blank(self):
+#        self.supplement.name = ''
+#
+#        with self.assertRaises(ValidationError) as ve:
+#            self.supplement.full_clean()
+#
+#        expected_error_message = {'name': ['This field cannot be blank.']}
+#        self.assertEqual(expected_error_message, ve.exception.message_dict)
