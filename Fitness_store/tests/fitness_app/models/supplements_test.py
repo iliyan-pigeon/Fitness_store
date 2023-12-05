@@ -177,3 +177,21 @@ class SupplementsTest(TestCase):
         expected_error_message = {'amount_type': [f'Ensure this value has at most {self.NAME_MAX_LENGTH} characters'
                                                   f' (it has {self.NAME_MAX_LENGTH + 1}).']}
         self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_price_is_null(self):
+        self.supplement.price = None
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'price': ['This field cannot be null.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
+
+    def test_when_price_is_blank(self):
+        self.supplement.price = ''
+
+        with self.assertRaises(ValidationError) as ve:
+            self.supplement.full_clean()
+
+        expected_error_message = {'price': ['“” value must be a float.']}
+        self.assertEqual(expected_error_message, ve.exception.message_dict)
