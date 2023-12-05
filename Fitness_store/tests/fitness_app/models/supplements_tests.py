@@ -20,6 +20,7 @@ class SupplementsTest(TestCase):
         self.supplement = Supplements.objects.create(**self.VALID_DATA)
 
     def test_valid_supplement_creation(self):
+
         self.assertEqual(self.supplement.name, 'Test Supplement')
         self.assertEqual(self.supplement.description, 'This is a test supplement description.')
         self.assertEqual(self.supplement.best_selling, True)
