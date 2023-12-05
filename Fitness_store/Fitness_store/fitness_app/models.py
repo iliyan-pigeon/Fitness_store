@@ -24,9 +24,9 @@ class Supplements(models.Model):
     description = models.TextField(
         null=False,
         blank=False,
-        max_length=300,
         validators=(
             validators.MinLengthValidator(5),
+            validators.MaxLengthValidator(300),
         ),
     )
 
