@@ -2,10 +2,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib.sessions.middleware import SessionMiddleware
 from django.test.client import RequestFactory
-from django.http import HttpRequest
-from django.shortcuts import get_object_or_404
 from Fitness_store.fitness_app.views import add_to_cart
 from Fitness_store.fitness_app.models import Supplements, GymEquipment, CartItem
 
@@ -13,6 +10,7 @@ UserModel = get_user_model()
 
 
 class AddToCartViewTest(TestCase):
+
     def setUp(self):
         self.supplement_data = {
             'name': 'Test Supplement',
