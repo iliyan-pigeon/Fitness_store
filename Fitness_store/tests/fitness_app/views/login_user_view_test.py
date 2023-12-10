@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from Fitness_store.fitness_app.forms import LoginForm
-from Fitness_store.fitness_app.views import LoginUserView
 
 UserModel = get_user_model()
 
