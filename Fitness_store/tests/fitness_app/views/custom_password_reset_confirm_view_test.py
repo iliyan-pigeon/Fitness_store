@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from Fitness_store.fitness_app.forms import CustomSetPasswordForm
-
 
 class CustomPasswordResetConfirmViewTest(TestCase):
 
