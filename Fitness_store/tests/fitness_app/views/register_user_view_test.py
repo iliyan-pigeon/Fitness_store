@@ -1,10 +1,7 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from Fitness_store.fitness_app.forms import RegisterUserForm  # Import your RegisterUserForm
-from Fitness_store.fitness_app.views import RegisterUserView  # Import your RegisterUserView
+from Fitness_store.fitness_app.forms import RegisterUserForm
 
 UserModel = get_user_model()
 
