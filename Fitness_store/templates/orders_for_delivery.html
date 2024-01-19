@@ -7,7 +7,7 @@
 
     <div class="orders-container">
     {% for order in orders %}
-        <a href="{% url 'order details' order.pk %}" class="single-order">{{ order.address }}: {{ order.date_added }}</a>
+        <a href="{% url 'order details' order.pk %}" class="single-order">Address: {{ order.address }}, Date added: {{ order.date_added }}</a>
     {% endfor %}
     {% else %}
         <h2 class="orders-heading">No orders</h2>
