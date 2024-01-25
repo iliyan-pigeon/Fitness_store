@@ -259,8 +259,9 @@ def search_product(request):
 
 def orders_for_delivery(request):
     orders = Order.objects.all()
+    orders_amount = len(orders)
 
-    return render(request, 'orders_for_delivery.html', {'orders': orders})
+    return render(request, 'orders_for_delivery.html', {'orders': orders, 'orders_amount': orders_amount})
 
 
 def order_details(request, pk):
