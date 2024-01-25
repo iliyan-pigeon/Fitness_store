@@ -4,6 +4,7 @@
 
     {% if orders %}
     <h2 class="orders-heading">Orders</h2>
+    <h3 class="orders-heading">Amount of orders: {{ orders_amount }}</h3>
 
     <div class="orders-container">
     {% for order in orders %}
