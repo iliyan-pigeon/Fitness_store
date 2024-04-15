@@ -63,15 +63,14 @@
 
         addToCartButtons.forEach(button => {
             button.addEventListener('click', function () {
-                const supplementId = this.getAttribute('data-supplement-id');
-                const productType = 'supplement';  // Adjust this according to your product type
-                const productId = supplementId;     // Assuming supplementId is the product ID
-                addToCart(productType, productId);
+                const product_id = this.getAttribute('data-supplement-id');
+                const product_type = 'supplement';  // Adjust this according to your product type
+                addToCart(product_type, product_id);
             });
         });
 
-        function addToCart(productType, productId) {
-            const url = `{% url 'add_to_cart' 'supplement' productId %}`;
+        function addToCart(product_type, product_id) {
+            const url = `{% url 'add to cart' 'supplement' product.id %}`;
             fetch(url, {
                 method: 'GET',
                 headers: {
