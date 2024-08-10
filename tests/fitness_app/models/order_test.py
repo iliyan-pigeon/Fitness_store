@@ -116,4 +116,3 @@ class OrderTest(TestCase):
         self.order.payment = 'card'
 
         self.assertEqual(self.order.payment, 'card')
-        

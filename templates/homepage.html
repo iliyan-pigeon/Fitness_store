@@ -21,9 +21,9 @@
                     <div class="product-container"><p>Amount: {{ supplement.amount }} {{ supplement.amount_type }}</p><p>Price: ${{ supplement.price|floatformat:2 }}</p>
                     </div>
                     {% if supplement.amount_in_stock > 0 %}
-                    <button class="my-button add-to-cart-btn" data-supplement-id="{{ supplement.id }}">
+                    <a href="{% url 'add to cart' 'supplement' supplement.id %}" class="my-button">
                         Add to cart
-                    </button>
+                    </a>
                     {% else %}
                     <button class="my-button out-of-stock">Out of stock</button>
                     {% endif %}
@@ -57,54 +57,4 @@
             {% endfor %}
         </div>
     </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const product_id = this.getAttribute('data-supplement-id');
-                const product_type = 'supplement';  // Adjust this according to your product type
-                addToCart(product_type, product_id);
-            });
-        });
-
-        function addToCart(product_type, product_id) {
-            const url = `{% url 'add to cart' 'supplement' product.id %}`;
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken') // Include CSRF token if needed
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                // Handle successful response
-                console.log('Item added to cart successfully');
-            })
-            .catch(error => {
-                // Handle error
-                console.error('Error:', error);
-            });
-        }
-
-        // Function to get CSRF token
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-    });
-</script>
 {% endblock %}

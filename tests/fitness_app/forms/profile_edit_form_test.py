@@ -22,4 +22,3 @@ class ProfileEditFormTest(TestCase):
         }
         form = ProfileEditForm(instance=user, data=form_data)
         self.assertTrue(form.is_valid())
-        
