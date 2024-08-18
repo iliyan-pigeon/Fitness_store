@@ -132,30 +132,48 @@ class ProfileDeleteView(views.DeleteView):
         return self.request.user
 
 
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import Supplements, GymEquipment, CartItem
+from .cart import get_or_create_cart
+
+
 def add_to_cart(request, product_type, product_id):
+    # Initialize the product variable
     product = None
+
+    # Determine the product type and fetch the product
     if product_type == 'supplement':
         product = get_object_or_404(Supplements, id=product_id)
     elif product_type == 'gym_equipment':
         product = get_object_or_404(GymEquipment, id=product_id)
 
     if product:
+        # Get or create the cart
         cart = get_or_create_cart(request)
 
+        # Get or create the cart item
         cart_item, created = CartItem.objects.get_or_create(
             cart=cart,
-            name=product.name,
-            price=product.price,
-            defaults={'quantity': 1},
             product_id=product.id,
-            product_type=product_type
+            product_type=product_type,
+            defaults={'name': product.name, 'price': product.price, 'quantity': 1}
         )
+
+        # Update the cart item quantity if it's within the stock limit
         if cart_item.quantity < product.amount_in_stock:
             if not created:
                 cart_item.quantity += 1
                 cart_item.save()
 
-    return redirect('homepage')
+            # Respond with success
+            return JsonResponse({'success': True, 'quantity': cart_item.quantity})
+        else:
+            # If stock limit is reached
+            return JsonResponse({'success': False, 'error': 'Not enough stock available'})
+
+    # If product is not found or some error occurs
+    return JsonResponse({'success': False, 'error': 'Product could not be added to the cart'})
 
 
 def remove_from_cart(request, product_type, product_id):
